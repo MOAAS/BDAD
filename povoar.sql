@@ -86,3 +86,80 @@ insert into Airport values(27, 27, "Barcelona–El Prat", "BCN");
 insert into Airport values(28, 06, "St Pancras International", "QQS");
 insert into Airport values(29, 15, "LaGuardia", "LGA");
 insert into Airport values(30, 15, "Newark Liberty", "EWR");
+
+-- ID, name --
+
+insert into Workplace values(0, "Cool HelpDesk");
+insert into Workplace values(1, "Cool CheckInDesk");
+insert into Workplace values(2, "Cool Landing Strip");
+insert into Workplace values(3, "Cool Luggage Counter");
+insert into Workplace values(4, "Cool Gate");
+
+
+-- SSN, Name, BirthDate, PhoneNum, Country --
+insert into Person values("448-17-7560", "Pedro Moas",                  "29-06-2000", "535810867", 0);
+insert into Person values("268-60-4192", "Daniel Brandao",              "29-06-2000", "723877122", 0);
+insert into Person values("488-10-3030", "Henrique Santos",             "29-06-2000", "105142167", 0);
+insert into Person values("811-60-0024", "António Manuel Ferrao",       "29-06-2000", "805173159", 0);
+insert into Person values("846-02-3946", "Joan Miro",                   "29-06-2000", "259874184", 1);
+insert into Person values("664-01-6801", "Pablo Picasso",               "29-06-2000", "910649292", 1);
+insert into Person values("559-51-8358", "Helen of Troy",               "29-06-2000", "483742214", 2);
+insert into Person values("104-96-4339", "Gustave Eiffel",              "29-06-2000", "569954106", 2); --
+insert into Person values("596-67-8963", "Robert de Niro",              "29-06-2000", "281466649", 3);
+insert into Person values("755-28-0421", "Pope Benedict XVI",           "29-06-2000", "355905525", 3);
+insert into Person values("421-17-7728", "Edsger Dijkstra",             "29-06-2000", "402440002", 4);
+insert into Person values("915-95-0390", "John Oliver",                 "29-06-2000", "203583521", 6);
+insert into Person values("867-91-5038", "Sir Patrick Stewart",         "29-06-2000", "248813141", 6); 
+insert into Person values("157-85-9541", "Leonardo da Vinci",           "29-06-2000", "693149463", 7);
+insert into Person values("522-33-8445", "Christopher Columbus",        "29-06-2000", "488004957", 7);
+insert into Person values("636-97-4046", "Arnold Schwarzenegger",       "29-06-2000", "944968861", 8);
+insert into Person values("188-55-2332", "Ingvar Kamprad",              "29-06-2000", "349314027", 11);
+insert into Person values("117-47-0238", "Albert Einstein",             "29-06-2000", "257577076", 13);
+insert into Person values("156-25-0110", "Plato",                       "29-06-2000", "171996380", 14);
+insert into Person values("810-88-3403", "Aristotle",                   "29-06-2000", "708121533", 14);
+insert into Person values("118-78-6068", "Bob Ross",                    "29-06-2000", "448849408", 15);
+insert into Person values("534-94-1513", "Walt Disney",                 "29-06-2000", "409288029", 15);
+insert into Person values("378-69-2529", "Wilbur Wright ",              "29-06-2000", "215093612", 15);
+insert into Person values("509-07-3067", "Orville Wright ",             "29-06-2000", "291048841", 15);
+insert into Person values("269-22-8437", "Joer Bolsanero",              "29-06-2000", "362733425", 17);
+insert into Person values("783-23-3880", "Mohandas Karamchand Gandhi",  "29-06-2000", "662503275", 19);
+insert into Person values("151-18-8196", "Sun Tzu",                     "29-06-2000", "816443907", 20);
+insert into Person values("523-49-3356", "Yoko Ono",                    "29-06-2000", "509182591", 21);
+insert into Person values("810-71-8816", "Vladimir Putin",              "29-06-2000", "310645601", 22);
+insert into Person values("210-91-5976", "Mohammed Rashid Al Maktoum",  "29-06-2000", "786043209", 23);
+
+-- SSN, Salary, NIF, WorkplaceID --
+
+insert into Employee values("448-17-7560", 5530, "302739485", 0);
+insert into Employee values("268-60-4192", 3957, "651994470", 0);
+insert into Employee values("488-10-3030", 5392, "560056987", 0);
+insert into Employee values("811-60-0024", 8320, "260807591", 0);
+insert into Employee values("846-02-3946", 6358, "890419768", 1);
+insert into Employee values("664-01-6801", 4557, "856261184", 1);
+insert into Employee values("559-51-8358", 6768, "390999080", 2);
+insert into Employee values("104-96-4339", 4149, "290615058", 2);
+
+-- SSN, IDnum -- 
+
+insert into Passenger values("596-67-8963", "6840709ZDS");
+insert into Passenger values("755-28-0421", "1510776TBC");
+insert into Passenger values("421-17-7728", "78984433YE");
+insert into Passenger values("915-95-0390", "6028411ECC");
+insert into Passenger values("867-91-5038", "2130083155");
+insert into Passenger values("157-85-9541", "7062273U8M");
+insert into Passenger values("522-33-8445", "6710988JRX");
+insert into Passenger values("636-97-4046", "3757976ZPO");
+insert into Passenger values("188-55-2332", "1910378C95");
+insert into Passenger values("117-47-0238", "9491547JFP");
+insert into Passenger values("156-25-0110", "81363070FP");
+insert into Passenger values("810-88-3403", "6699436QCN");
+insert into Passenger values("118-78-6068", "7182280DTJ");
+insert into Passenger values("534-94-1513", "0137130WSY");
+insert into Passenger values("378-69-2529", "0175048UUP");
+insert into Passenger values("509-07-3067", "0547115FWG");
+insert into Passenger values("269-22-8437", "3114525W1B");
+insert into Passenger values("783-23-3880", "7489688SL9");
+insert into Passenger values("151-18-8196", "6052663QTH");
+insert into Passenger values("523-49-3356", "1113266GOQ");
+insert into Passenger values("810-71-8816", "4627716EVL");
+insert into Passenger values("210-91-5976", "2793427Z8I");

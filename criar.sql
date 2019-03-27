@@ -29,29 +29,28 @@ drop table if exists LuggageCounter;
 PRAGMA foreign_keys = ON;
 
 create table Person (
-    NIF TEXT PRIMARY KEY,
+    SSN TEXT PRIMARY KEY,
     personName TEXT,
-    BirthDate TEXT,
-    PhoneNumber TEXT,
+    BirthDate DATE,
+    PhoneNumber TEXT UNIQUE,
     country INTEGER REFERENCES Country(CountryID)
 );
 
 create table Employee (
-    PersonID TEXT REFERENCES Person(NIF),
+    PersonID TEXT PRIMARY KEY REFERENCES Person(SSN),
     Salary INTEGER,
-    Workplace REFERENCES Workplace(WorkplaceID),
-    PRIMARY KEY (PersonID)
+    NIF TEXT UNIQUE,
+    WorkplaceID INTEGER REFERENCES Workplace(WorkplaceID)
 );
 
 create table Passenger (
-    PersonID TEXT REFERENCES Person(NIF),
-    IDnumber TEXT,
-    PRIMARY KEY (PersonID)
+    PersonID TEXT PRIMARY KEY REFERENCES Person(SSN),
+    IDnumber TEXT UNIQUE
 );
 
 create table IsBoss (
-    BossID INTEGER REFERENCES Employee(Person),
-    BossedID INTEGER REFERENCES Employee(Person),
+    BossID TEXT REFERENCES Employee(PersonID),
+    BossedID TEXT REFERENCES Employee(PersonID),
     CHECK (BossID <> BossedID)
 );
 
@@ -61,20 +60,16 @@ create table Country (
 );
 
 create table City ( 
-    CityID INTEGER,
-    CountryID INTEGER,
-    CityName TEXT,
-    PRIMARY KEY (CityID),
-    FOREIGN KEY (CountryID) REFERENCES Country(CountryID)
+    CityID INTEGER PRIMARY KEY,
+    CountryID INTEGER REFERENCES Country(CountryID),
+    CityName TEXT
 );
 
 create table Airport (
-    AirportID INTEGER,
-    CityID INTEGER,
+    AirportID INTEGER PRIMARY KEY,
+    CityID INTEGER REFERENCES City(CityID),
     AirportName TEXT,
-    AirportCode TEXT,
-    PRIMARY KEY (AirportID),
-    FOREIGN KEY (CityID) REFERENCES City(CityID)
+    AirportCode TEXT
 );
 
 -- create table Trip
