@@ -89,12 +89,73 @@ insert into Airport values(30, 15, "Newark Liberty", "EWR");
 
 -- ID, name --
 
-insert into Workplace values(0, "Cool HelpDesk");
-insert into Workplace values(1, "Cool CheckInDesk");
-insert into Workplace values(2, "Cool Landing Strip");
-insert into Workplace values(3, "Cool Luggage Counter");
-insert into Workplace values(4, "Cool Gate");
+insert into Workplace values(00, "HelpDesk 1");
+insert into Workplace values(01, "HelpDesk 2");
+insert into Workplace values(02, "CheckInDesk 1");
+insert into Workplace values(03, "CheckInDesk 2");
+insert into Workplace values(04, "CheckInDesk 3");
+insert into Workplace values(05, "CheckInDesk 4");
+insert into Workplace values(06, "CheckInDesk 5");
+insert into Workplace values(07, "CheckInDesk 6");
+insert into Workplace values(08, "CheckInDesk 7");
+insert into Workplace values(09, "CheckInDesk 8");
+insert into Workplace values(10, "CheckInDesk 9");
+insert into Workplace values(11, "CheckInDesk 10");
+insert into Workplace values(12, "Landing Strip 1");
+insert into Workplace values(13, "Landing Strip 2");
+insert into Workplace values(14, "Landing Strip 3");
+insert into Workplace values(15, "Landing Strip 4");
+insert into Workplace values(16, "Landing Strip 5");
+insert into Workplace values(17, "Luggage Counter 1");
+insert into Workplace values(18, "Luggage Counter 2");
+insert into Workplace values(19, "Luggage Counter 3");
+insert into Workplace values(20, "Luggage Counter 4");
+insert into Workplace values(21, "Luggage Counter 5");
+insert into Workplace values(22, "Gate 1");
+insert into Workplace values(23, "Gate 2");
+insert into Workplace values(24, "Gate 3");
+insert into Workplace values(25, "Gate 4");
+insert into Workplace values(26, "Gate 5");
+insert into Workplace values(27, "Gate 6");
+insert into Workplace values(28, "Gate 7");
+insert into Workplace values(29, "Gate 8");
+insert into Workplace values(30, "Gate 9");
+insert into Workplace values(31, "Gate 10");
+insert into Workplace values(32, "Gate 11");
+insert into Workplace values(33, "Gate 12");
+insert into Workplace values(34, "Gate 13");
+insert into Workplace values(35, "Gate 14");
+insert into Workplace values(36, "Gate 15");
+insert into Workplace values(37, "Gate 16");
+insert into Workplace values(38, "Gate 17");
+insert into Workplace values(39, "Gate 18");
+insert into Workplace values(40, "Gate 19");
+insert into Workplace values(41, "Gate 20");
 
+-- Workplace, GateName, IsBoarding --
+
+insert into Gate values(22, "B1", "TRUE");
+insert into Gate values(23, "B2", "TRUE");
+insert into Gate values(24, "B3", "TRUE");
+insert into Gate values(25, "B4", "TRUE");
+insert into Gate values(26, "B5", "TRUE");
+insert into Gate values(27, "B6", "TRUE");
+insert into Gate values(28, "B7", "TRUE");
+insert into Gate values(29, "B8", "TRUE");
+insert into Gate values(30, "B9", "TRUE");
+insert into Gate values(31, "B10", "TRUE");
+insert into Gate values(32, "B11", "TRUE");
+insert into Gate values(33, "B12", "TRUE");
+insert into Gate values(34, "B13", "TRUE");
+insert into Gate values(35, "B14", "TRUE");
+insert into Gate values(36, "B15", "TRUE");
+
+
+insert into Gate values(37, "D1", "FALSE");
+insert into Gate values(38, "D2", "FALSE");
+insert into Gate values(39, "D3", "FALSE");
+insert into Gate values(40, "D4", "FALSE");
+insert into Gate values(41, "D5", "FALSE");
 
 -- SSN, Name, BirthDate, PhoneNum, Country --
 insert into Person values("448-17-7560", "Pedro Moas",                  "29-06-2000", "535810867", 0);
