@@ -157,6 +157,14 @@ insert into Gate values(39, "D3", "FALSE");
 insert into Gate values(40, "D4", "FALSE");
 insert into Gate values(41, "D5", "FALSE");
 
+-- Workplace, StripNum --
+
+insert into Strip values(12, 1);
+insert into Strip values(13, 2);
+insert into Strip values(14, 3);
+insert into Strip values(15, 4);
+insert into Strip values(16, 5);
+
 -- SSN, Name, BirthDate, PhoneNum, Country --
 insert into Person values("448-17-7560", "Pedro Moas",                  "29-06-2000", "535810867", 0);
 insert into Person values("268-60-4192", "Daniel Brandao",              "29-06-2000", "723877122", 0);
