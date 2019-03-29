@@ -74,27 +74,28 @@ create table Airport (
 
 create table Trip (
     TripID INTEGER PRIMARY KEY,
-    DepartureDate DATE,
-    DepartureTime TIME,
-    ArrivalDate DATE,
-    ArrivalTime TIME,
-    DurationHours INTEGER,
-    DurationMinutes INTEGER,
-    IsDeparture BOOLEAN NOT NULL CHECK (HasEmbarked IN(0,1)),
-    GateID INTEGER REFERENCES Gate,
-    StripID INTEGER REFERENCES Strip,
-    AirplaneID INTEGER REFERENCES Airplane,
-    AirportID INTEGER REFERENCES Airport
+    DepartureDate DATE NOT NULL,
+    DepartureTime TIME NOT NULL,
+    ArrivalDate DATE NOT NULL,
+    ArrivalTime TIME NOT NULL,
+    DurationHours INTEGER NOT NULL,
+    DurationMinutes INTEGER NOT NULL,
+    IsDeparture BOOLEAN NOT NULL CHECK (IsDeparture IN(0,1)),
+    GateID INTEGER NOT NULL REFERENCES Gate,
+    StripID INTEGER NOT NULL REFERENCES Strip,
+    AirplaneID INTEGER NOT NULL REFERENCES Airplane,
+    AirportID INTEGER NOT NULL REFERENCES Airport
 );
 
 
 create table Ticket (
-    PassengerID INTEGER PRIMARY KEY REFERENCES Passenger,
-    TripID INTEGER PRIMARY KEY REFERENCES Trip,
-    SeatNumber INTEGER,
-    HasCheckedIn BOOLEAN NOT NULL CHECK (HasEmbarked IN(0,1)),
-    HasEmbarked BOOLEAN NOT NULL CHECK (HasEmbarked IN(0,1)),
-    HasEnteredEmbarkingZone BOOLEAN NOT NULL CHECK (HasEmbarked IN(0,1))
+    PassengerID INTEGER REFERENCES Passenger,
+    TripID INTEGER REFERENCES Trip,
+    SeatNumber INTEGER NOT NULL,
+    HasCheckedIn BOOLEAN NOT NULL CHECK (HasCheckedIn IN(0,1)),
+    HasBoarded BOOLEAN NOT NULL CHECK (HasBoarded IN(0,1)),
+    HasEnteredBoardingZone BOOLEAN NOT NULL CHECK (HasEnteredBoardingZone IN(0,1)),
+    PRIMARY KEY (PassengerID, TripID)
 );
 
 create table Luggage (
@@ -105,8 +106,8 @@ create table Luggage (
 create table LuggageDropOff (
     TripID INTEGER PRIMARY KEY REFERENCES Trip,
     TerminalID INTEGER REFERENCES Terminal,
-    Date TEXT,
-    Time TEXT,
+    DropoffDate TEXT,
+    DropoffTime TEXT
 );
 
 create table Airplane (
@@ -127,12 +128,9 @@ create table AirplaneModel (
     ModelName TEXT,
     SeatsPerRow INTEGER,
     NumRows INTEGER,
-    Capacity INTEGER
-    CHECK (SeatsPerRow * NumRows = Capacity)
+    Capacity INTEGER,
+    CONSTRAINT CheckCapacity CHECK (SeatsPerRow * NumRows = Capacity)
 );
-
--- create table Class
--- create table ClassRows
 
 create table Workplace (
     WorkplaceID INTEGER PRIMARY KEY,
@@ -142,7 +140,7 @@ create table Workplace (
 create table Gate (
     WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace,
     GateName TEXT UNIQUE,
-    IsBoardingGate BOOLEAN NOT NULL CHECK (HasEmbarked IN(0,1)),
+    IsBoardingGate BOOLEAN NOT NULL CHECK (IsBoardingGate IN(0,1))
 );
 
 create table Strip (
