@@ -9,14 +9,13 @@ drop table if exists Country;
 drop table if exists City;
 drop table if exists Airport;
 drop table if exists Trip;
+drop table if exists Class;
 drop table if exists Ticket;
 drop table if exists Luggage;
 drop table if exists LuggageDropOff;
 drop table if exists Airplane;
 drop table if exists Airline;
 drop table if exists AirplaneModel;
-drop table if exists Class;
-drop table if exists ClassRows;
 drop table if exists Workplace;
 drop table if exists Gate;
 drop table if exists Strip;
@@ -24,7 +23,7 @@ drop table if exists Desk;
 drop table if exists CheckInDesk;
 drop table if exists HelpDesk;
 drop table if exists HasDesk;
-drop table if exists LuggageCounter;
+drop table if exists LuggageBelt;
 
 PRAGMA foreign_keys = ON;
 
@@ -38,7 +37,7 @@ create table Person (
 
 create table Employee (
     PersonID TEXT PRIMARY KEY REFERENCES Person,
-    Salary INTEGER,
+    Salary REAL CHECK (Salary > 0),
     NIF TEXT UNIQUE,
     WorkplaceID INTEGER REFERENCES Workplace
 );
@@ -50,7 +49,7 @@ create table Passenger (
 
 create table IsBoss (
     BossID TEXT REFERENCES Employee,
-    BossedID TEXT REFERENCES Employee,
+    BossedID TEXT PRIMARY KEY REFERENCES Employee,
     CHECK (BossID <> BossedID)
 );
 
@@ -69,7 +68,7 @@ create table Airport (
     AirportID INTEGER PRIMARY KEY,
     CityID INTEGER REFERENCES City,
     AirportName TEXT,
-    AirportCode TEXT
+    AirportCode TEXT CHECK (LENGTH(AirportCode) = 3)
 );
 
 create table Trip (
@@ -78,8 +77,7 @@ create table Trip (
     DepartureTime TIME NOT NULL,
     ArrivalDate DATE NOT NULL,
     ArrivalTime TIME NOT NULL,
-    DurationHours INTEGER NOT NULL,
-    DurationMinutes INTEGER NOT NULL,
+    DurationHours REAL NOT NULL,
     IsDeparture BOOLEAN NOT NULL CHECK (IsDeparture IN(0,1)),
     GateID INTEGER NOT NULL REFERENCES Gate,
     StripID INTEGER NOT NULL REFERENCES Strip,
@@ -87,14 +85,19 @@ create table Trip (
     AirportID INTEGER NOT NULL REFERENCES Airport
 );
 
+create table Class (
+    ClassID INTEGER PRIMARY KEY,
+    ClassName TEXT UNIQUE
+);
 
 create table Ticket (
     PassengerID INTEGER REFERENCES Passenger,
     TripID INTEGER REFERENCES Trip,
     SeatNumber INTEGER NOT NULL,
-    HasCheckedIn BOOLEAN NOT NULL CHECK (HasCheckedIn IN(0,1)),
-    HasBoarded BOOLEAN NOT NULL CHECK (HasBoarded IN(0,1)),
-    HasEnteredBoardingZone BOOLEAN NOT NULL CHECK (HasEnteredBoardingZone IN(0,1)),
+    HasCheckedIn BOOLEAN CHECK (HasCheckedIn IN(0,1)),
+    HasEnteredBoardingZone BOOLEAN CHECK (HasEnteredBoardingZone IN(0,1)),
+    HasBoarded BOOLEAN CHECK (HasBoarded IN(0,1)),
+    ClassID INTEGER REFERENCES Class,
     PRIMARY KEY (PassengerID, TripID)
 );
 
@@ -105,14 +108,15 @@ create table Luggage (
 
 create table LuggageDropOff (
     TripID INTEGER PRIMARY KEY REFERENCES Trip,
-    TerminalID INTEGER REFERENCES Terminal,
-    DropoffDate TEXT,
-    DropoffTime TEXT
+    BeltID INTEGER REFERENCES LuggageBelt,
+    DropoffDate DATE,
+    DropoffTime TIME,
+    UNIQUE (DropoffDate, DropoffTime, BeltID)
 );
 
 create table Airplane (
     AirplaneID INTEGER PRIMARY KEY,
-    AirplaneName TEXT,
+    AirplaneName TEXT UNIQUE,
     AirlineID INTEGER REFERENCES Airline,
     ModelID INTEGER REFERENCES AirplaneModel
 );
@@ -148,8 +152,29 @@ create table Strip (
     StripNum INTEGER UNIQUE
 );
 
--- create table Desk
--- create table CheckInDesk
--- create table HelpDesk
--- create table HasDesk
--- create table LuggageCounter
+create table Desk (
+    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace
+);
+
+create table CheckInDesk (
+    DeskID INTEGER PRIMARY KEY REFERENCES Desk,
+    CheckInNum INTEGER UNIQUE
+);
+
+create table HelpDesk (
+    DeskID INTEGER PRIMARY KEY REFERENCES Desk,
+    OpenTime TIME,
+    CloseTime TIME,
+    CONSTRAINT CloseTimeAfter CHECK (OpenTime < CloseTime)
+);
+
+create table HasDesk (
+    AirlineID INTEGER REFERENCES Airline,
+    DeskID INTEGER REFERENCES Desk,
+    PRIMARY KEY (AirlineID, DeskID)
+);
+
+create table LuggageBelt (
+    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace,
+    BeltNum INTEGER UNIQUE
+);
