@@ -18,7 +18,7 @@ drop table if exists Airline;
 drop table if exists AirplaneModel;
 drop table if exists Workplace;
 drop table if exists Gate;
-drop table if exists Strip;
+drop table if exists Runway;
 drop table if exists Desk;
 drop table if exists CheckInDesk;
 drop table if exists HelpDesk;
@@ -28,7 +28,8 @@ drop table if exists LuggageBelt;
 PRAGMA foreign_keys = ON;
 
 create table Person (
-    SSN TEXT PRIMARY KEY,
+    PersonID INTEGER PRIMARY KEY,
+    SSN TEXT UNIQUE,
     personName TEXT,
     BirthDate DATE,
     PhoneNumber TEXT UNIQUE,
@@ -36,20 +37,20 @@ create table Person (
 );
 
 create table Employee (
-    PersonID TEXT PRIMARY KEY REFERENCES Person,
+    PersonID INTEGER PRIMARY KEY REFERENCES Person,
     Salary REAL CHECK (Salary > 0),
     NIF TEXT UNIQUE,
     WorkplaceID INTEGER REFERENCES Workplace
 );
 
 create table Passenger (
-    PersonID TEXT PRIMARY KEY REFERENCES Person,
+    PersonID INTEGER PRIMARY KEY REFERENCES Person,
     IDnumber TEXT UNIQUE
 );
 
 create table IsBoss (
-    BossID TEXT REFERENCES Employee,
-    BossedID TEXT PRIMARY KEY REFERENCES Employee,
+    BossID INTEGER REFERENCES Employee,
+    BossedID INTEGER PRIMARY KEY REFERENCES Employee,
     CHECK (BossID <> BossedID)
 );
 
@@ -65,10 +66,9 @@ create table City (
 );
 
 create table Airport (
-    AirportID INTEGER PRIMARY KEY,
+    AirportCode TEXT PRIMARY KEY CHECK (LENGTH(AirportCode) = 3),
     CityID INTEGER REFERENCES City,
-    AirportName TEXT,
-    AirportCode TEXT CHECK (LENGTH(AirportCode) = 3)
+    AirportName TEXT
 );
 
 create table Trip (
@@ -80,7 +80,7 @@ create table Trip (
     DurationHours REAL NOT NULL,
     IsDeparture BOOLEAN NOT NULL CHECK (IsDeparture IN(0,1)),
     GateID INTEGER NOT NULL REFERENCES Gate,
-    StripID INTEGER NOT NULL REFERENCES Strip,
+    RunwayID INTEGER NOT NULL REFERENCES Runway,
     AirplaneID INTEGER NOT NULL REFERENCES Airplane,
     AirportID INTEGER NOT NULL REFERENCES Airport
 );
@@ -93,7 +93,8 @@ create table Class (
 create table Ticket (
     PassengerID INTEGER REFERENCES Passenger,
     TripID INTEGER REFERENCES Trip,
-    SeatNumber INTEGER NOT NULL,
+    SeatRow INTEGER NOT NULL CHECK (SeatRow > 0)
+    SeatLetter TEXT NOT NULL CHECK (LENGTH(SeatLetter) = 1)
     HasCheckedIn BOOLEAN CHECK (HasCheckedIn IN(0,1)),
     HasEnteredBoardingZone BOOLEAN CHECK (HasEnteredBoardingZone IN(0,1)),
     HasBoarded BOOLEAN CHECK (HasBoarded IN(0,1)),
@@ -147,9 +148,9 @@ create table Gate (
     IsBoardingGate BOOLEAN NOT NULL CHECK (IsBoardingGate IN(0,1))
 );
 
-create table Strip (
+create table Runway (
     WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace,
-    StripNum INTEGER UNIQUE
+    RunwayNum INTEGER UNIQUE
 );
 
 create table Desk (
@@ -170,7 +171,7 @@ create table HelpDesk (
 
 create table HasDesk (
     AirlineID INTEGER REFERENCES Airline,
-    DeskID INTEGER REFERENCES Desk,
+    DeskID INTEGER REFERENCES CheckInDesk,
     PRIMARY KEY (AirlineID, DeskID)
 );
 
