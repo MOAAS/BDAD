@@ -134,28 +134,28 @@ insert into Workplace values(41, "Gate 20");
 
 -- Workplace, GateName, IsBoarding --
 
-insert into Gate values(22, "B1", "TRUE");
-insert into Gate values(23, "B2", "TRUE");
-insert into Gate values(24, "B3", "TRUE");
-insert into Gate values(25, "B4", "TRUE");
-insert into Gate values(26, "B5", "TRUE");
-insert into Gate values(27, "B6", "TRUE");
-insert into Gate values(28, "B7", "TRUE");
-insert into Gate values(29, "B8", "TRUE");
-insert into Gate values(30, "B9", "TRUE");
-insert into Gate values(31, "B10", "TRUE");
-insert into Gate values(32, "B11", "TRUE");
-insert into Gate values(33, "B12", "TRUE");
-insert into Gate values(34, "B13", "TRUE");
-insert into Gate values(35, "B14", "TRUE");
-insert into Gate values(36, "B15", "TRUE");
+insert into Gate values(22, "B1", 1);
+insert into Gate values(23, "B2", 1);
+insert into Gate values(24, "B3", 1);
+insert into Gate values(25, "B4", 1);
+insert into Gate values(26, "B5", 1);
+insert into Gate values(27, "B6", 1);
+insert into Gate values(28, "B7", 1);
+insert into Gate values(29, "B8", 1);
+insert into Gate values(30, "B9", 1);
+insert into Gate values(31, "B10", 1);
+insert into Gate values(32, "B11", 1);
+insert into Gate values(33, "B12", 1);
+insert into Gate values(34, "B13", 1);
+insert into Gate values(35, "B14", 1);
+insert into Gate values(36, "B15", 1);
 
 
-insert into Gate values(37, "D1", "FALSE");
-insert into Gate values(38, "D2", "FALSE");
-insert into Gate values(39, "D3", "FALSE");
-insert into Gate values(40, "D4", "FALSE");
-insert into Gate values(41, "D5", "FALSE");
+insert into Gate values(37, "D1", 0);
+insert into Gate values(38, "D2", 0);
+insert into Gate values(39, "D3", 0);
+insert into Gate values(40, "D4", 0);
+insert into Gate values(41, "D5", 0);
 
 -- Workplace, StripNum --
 

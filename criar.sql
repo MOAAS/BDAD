@@ -80,17 +80,34 @@ create table Trip (
     ArrivalTime TIME,
     DurationHours INTEGER,
     DurationMinutes INTEGER,
-    IsDeparture TEXT,
+    IsDeparture BOOLEAN NOT NULL CHECK (HasEmbarked IN(0,1)),
     GateID INTEGER REFERENCES Gate,
     StripID INTEGER REFERENCES Strip,
     AirplaneID INTEGER REFERENCES Airplane,
     AirportID INTEGER REFERENCES Airport
-    CONSTRAINT IsBool CHECK (IsDeparture = "TRUE" or IsDeparture = "FALSE")
 );
 
--- create table Ticket
--- create table Luggage
--- create table LuggageDropOff
+
+create table Ticket (
+    PassengerID INTEGER PRIMARY KEY REFERENCES Passenger,
+    TripID INTEGER PRIMARY KEY REFERENCES Trip,
+    SeatNumber INTEGER,
+    HasCheckedIn BOOLEAN NOT NULL CHECK (HasEmbarked IN(0,1)),
+    HasEmbarked BOOLEAN NOT NULL CHECK (HasEmbarked IN(0,1)),
+    HasEnteredEmbarkingZone BOOLEAN NOT NULL CHECK (HasEmbarked IN(0,1))
+);
+
+create table Luggage (
+    LuggageID INTEGER PRIMARY KEY,
+    Weight INTEGER
+);
+
+create table LuggageDropOff (
+    TripID INTEGER PRIMARY KEY REFERENCES Trip,
+    TerminalID INTEGER REFERENCES Terminal,
+    Date TEXT,
+    Time TEXT,
+);
 
 create table Airplane (
     AirplaneID INTEGER PRIMARY KEY,
@@ -119,14 +136,13 @@ create table AirplaneModel (
 
 create table Workplace (
     WorkplaceID INTEGER PRIMARY KEY,
-    WorkplaceName UNIQUE
+    WorkplaceName TEXT UNIQUE
 );
 
 create table Gate (
     WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace,
     GateName TEXT UNIQUE,
-    IsBoardingGate TEXT,
-    CONSTRAINT IsBool CHECK (IsBoardingGate = 'TRUE' or IsBoardingGate = 'FALSE')
+    IsBoardingGate BOOLEAN NOT NULL CHECK (HasEmbarked IN(0,1)),
 );
 
 create table Strip (
