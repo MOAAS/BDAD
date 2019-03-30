@@ -31,7 +31,7 @@ create table Person (
     PersonID INTEGER PRIMARY KEY,
     SSN TEXT UNIQUE,
     personName TEXT,
-    BirthDate DATE,
+    BirthDate DATE CHECK (LENGTH(BirthDate) = 10),
     PhoneNumber TEXT UNIQUE,
     country INTEGER REFERENCES Country(CountryID)
 );
@@ -77,10 +77,10 @@ create table Trip (
 
 create table Departure (
     TripID INTEGER PRIMARY KEY REFERENCES Trip(TripID),
-    DepartureDate DATE NOT NULL,
-    DepartureTime TIME NOT NULL,
-    ArrivalDate DATE NOT NULL,
-    ArrivalTime TIME NOT NULL,
+    DepartureDate DATE NOT NULL CHECK (LENGTH(DepartureDate) = 10),
+    DepartureTime TIME NOT NULL CHECK (LENGTH(DepartureTime) = 5),
+    ArrivalDate DATE NOT NULL CHECK (LENGTH(ArrivalDate) = 10),
+    ArrivalTime TIME NOT NULL CHECK (LENGTH(ArrivalTime) = 5),
     DurationHours REAL NOT NULL,
     GateID INTEGER NOT NULL REFERENCES Gate(WorkplaceID),
     RunwayID INTEGER NOT NULL REFERENCES Runway(WorkplaceID),
@@ -88,15 +88,16 @@ create table Departure (
     AirportCode TEXT NOT NULL REFERENCES Airport(AirportCode),
 
     CONSTRAINT AvailableGate UNIQUE(DepartureDate, DepartureTime, GateID),
-    CONSTRAINT AvailableRunway UNIQUE(DepartureDate, DepartureTime, RunwayID)
+    CONSTRAINT AvailableRunway UNIQUE(DepartureDate, DepartureTime, RunwayID),
+    CONSTRAINT AvailablePlane UNIQUE(DepartureDate, DepartureTime, AirplaneID)
 );
 
 create table Arrival (
     TripID INTEGER PRIMARY KEY REFERENCES Trip(TripID),
-    DepartureDate DATE NOT NULL,
-    DepartureTime TIME NOT NULL,
-    ArrivalDate DATE NOT NULL,
-    ArrivalTime TIME NOT NULL,
+    DepartureDate DATE NOT NULL CHECK (LENGTH(DepartureDate) = 10),
+    DepartureTime TIME NOT NULL CHECK (LENGTH(DepartureTime) = 5),
+    ArrivalDate DATE NOT NULL CHECK (LENGTH(ArrivalDate) = 10),
+    ArrivalTime TIME NOT NULL CHECK (LENGTH(ArrivalTime) = 5),
     DurationHours REAL NOT NULL,
     GateID INTEGER NOT NULL REFERENCES Gate(WorkplaceID),
     RunwayID INTEGER NOT NULL REFERENCES Runway(WorkplaceID),
@@ -109,7 +110,8 @@ create table Arrival (
 
     CONSTRAINT AvailableLuggageBelt UNIQUE (DropoffDate, DropoffTime, BeltID),
     CONSTRAINT AvailableGate UNIQUE(ArrivalDate, ArrivalTime, GateID),
-    CONSTRAINT AvailableRunway UNIQUE(ArrivalDate, ArrivalTime, RunwayID)
+    CONSTRAINT AvailableRunway UNIQUE(ArrivalDate, ArrivalTime, RunwayID),
+    CONSTRAINT AvailablePlane UNIQUE(DepartureDate, DepartureTime, AirplaneID)
 );
 
 create table Class (

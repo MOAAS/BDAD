@@ -520,8 +520,9 @@ insert into HasCheckInDesk values(17, 22);
 insert into HasCheckInDesk values(18, 23);
 insert into HasCheckInDesk values(19, 23);
 
--- TripID | Departures: 0 - 19, Arrivals: 20 - 39 --
+-- TripID --
 
+insert into Trip values(00);
 insert into Trip values(01);
 insert into Trip values(02);
 insert into Trip values(03);
@@ -561,3 +562,11 @@ insert into Trip values(36);
 insert into Trip values(37);
 insert into Trip values(38);
 insert into Trip values(39);
+
+-- Departures: 0 - 19, Arrivals: 20 - 39 --
+
+-- TripID, DepartureDate, DepartureTime, ArrivalDate, ArrivalTime, DurationHours, GateID, RunwayID, AirplaneID, AirportCode --
+
+insert into Departure values(0, "2019-04-10", "15:30", "2019-04-10", "16:30", 1.00, 34, 24, 0, "LIS");
+insert into Departure values(1, "2019-04-11", "15:30", "2019-04-11", "15:45", 0.25, 34, 24, 0, "OPO");
+insert into Departure values(2, "2019-04-11", "15:30", "2019-04-11", "15:45", 0.25, 35, 25, 1, "OPO");
