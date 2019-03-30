@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = OFF;
+
 -- Apagar tabelas --
 drop table if exists Person;
 drop table if exists Employee;
@@ -31,24 +33,24 @@ create table Person (
     personName TEXT,
     BirthDate DATE,
     PhoneNumber TEXT UNIQUE,
-    country INTEGER REFERENCES Country
+    country INTEGER REFERENCES Country(CountryID)
 );
 
 create table Employee (
-    PersonID INTEGER PRIMARY KEY REFERENCES Person,
+    PersonID INTEGER PRIMARY KEY REFERENCES Person(PersonID),
     Salary REAL CHECK (Salary > 0),
     NIF TEXT UNIQUE,
-    WorkplaceID INTEGER REFERENCES Workplace
+    WorkplaceID INTEGER REFERENCES Workplace(WorkplaceID)
 );
 
 create table Passenger (
-    PersonID INTEGER PRIMARY KEY REFERENCES Person,
+    PersonID INTEGER PRIMARY KEY REFERENCES Person(PersonID),
     IDnumber TEXT UNIQUE
 );
 
 create table IsBoss (
-    BossID INTEGER REFERENCES Employee,
-    BossedID INTEGER PRIMARY KEY REFERENCES Employee ON DELETE CASCADE ON UPDATE CASCADE,
+    BossID INTEGER REFERENCES Employee(PersonID),
+    BossedID INTEGER PRIMARY KEY REFERENCES Employee(PersonID) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT DifferentBoss CHECK (BossID <> BossedID)
 );
 
@@ -59,13 +61,13 @@ create table Country (
 
 create table City ( 
     CityID INTEGER PRIMARY KEY,
-    CountryID INTEGER REFERENCES Country ON DELETE CASCADE ON UPDATE CASCADE,
+    CountryID INTEGER REFERENCES Country(CountryID) ON DELETE CASCADE ON UPDATE CASCADE,
     CityName TEXT
 );
 
 create table Airport (
     AirportCode TEXT PRIMARY KEY CHECK (LENGTH(AirportCode) = 3),
-    CityID INTEGER REFERENCES City ON UPDATE CASCADE,
+    CityID INTEGER REFERENCES City(CityID) ON UPDATE CASCADE,
     AirportName TEXT
 );
 
@@ -74,34 +76,34 @@ create table Trip (
 );
 
 create table Departure (
-    TripID INTEGER PRIMARY KEY REFERENCES Trip,
+    TripID INTEGER PRIMARY KEY REFERENCES Trip(TripID),
     DepartureDate DATE NOT NULL,
     DepartureTime TIME NOT NULL,
     ArrivalDate DATE NOT NULL,
     ArrivalTime TIME NOT NULL,
     DurationHours REAL NOT NULL,
-    GateID INTEGER NOT NULL REFERENCES Gate,
-    RunwayID INTEGER NOT NULL REFERENCES Runway,
-    AirplaneID INTEGER NOT NULL REFERENCES Airplane,
-    AirportID INTEGER NOT NULL REFERENCES Airport,
+    GateID INTEGER NOT NULL REFERENCES Gate(WorkplaceID),
+    RunwayID INTEGER NOT NULL REFERENCES Runway(WorkplaceID),
+    AirplaneID INTEGER NOT NULL REFERENCES Airplane(AirplaneID),
+    AirportCode TEXT NOT NULL REFERENCES Airport(AirportCode),
 
     CONSTRAINT AvailableGate UNIQUE(DepartureDate, DepartureTime, GateID),
     CONSTRAINT AvailableRunway UNIQUE(DepartureDate, DepartureTime, RunwayID)
 );
 
 create table Arrival (
-    TripID INTEGER PRIMARY KEY REFERENCES Trip,
+    TripID INTEGER PRIMARY KEY REFERENCES Trip(TripID),
     DepartureDate DATE NOT NULL,
     DepartureTime TIME NOT NULL,
     ArrivalDate DATE NOT NULL,
     ArrivalTime TIME NOT NULL,
     DurationHours REAL NOT NULL,
-    GateID INTEGER NOT NULL REFERENCES Gate,
-    RunwayID INTEGER NOT NULL REFERENCES Runway,
-    AirplaneID INTEGER NOT NULL REFERENCES Airplane,
-    AirportID INTEGER NOT NULL REFERENCES Airport,
+    GateID INTEGER NOT NULL REFERENCES Gate(WorkplaceID),
+    RunwayID INTEGER NOT NULL REFERENCES Runway(WorkplaceID),
+    AirplaneID INTEGER NOT NULL REFERENCES Airplane(AirplaneID),
+    AirportCode TEXT NOT NULL REFERENCES Airport(AirportCode),
 
-    BeltID INTEGER NOT NULL REFERENCES LuggageBelt,
+    BeltID INTEGER NOT NULL REFERENCES LuggageBelt(WorkplaceID),
     DropoffDate DATE NOT NULL,
     DropoffTime TIME NOT NULL,
 
@@ -117,15 +119,15 @@ create table Class (
 
 create table Ticket (
     TicketID INTEGER PRIMARY KEY,
-    PassengerID INTEGER NOT NULL REFERENCES Passenger,
-    ArrivalID INTEGER REFERENCES Arrival,
-    DepartureID INTEGER REFERENCES Departure,    
+    PassengerID INTEGER NOT NULL REFERENCES Passenger(PersonID),
+    ArrivalID INTEGER REFERENCES Arrival(TripID),
+    DepartureID INTEGER REFERENCES Departure(TripID),    
     SeatRow INTEGER NOT NULL CHECK (SeatRow > 0),
     SeatLetter TEXT NOT NULL CHECK (LENGTH(SeatLetter) = 1),
     HasCheckedIn BOOLEAN CHECK (HasCheckedIn IN(0, 1, NULL)),
     HasEnteredBoardingZone BOOLEAN CHECK (HasEnteredBoardingZone IN(0, 1, NULL)),
     HasBoarded BOOLEAN CHECK (HasBoarded IN(0, 1, NULL)),
-    ClassID INTEGER REFERENCES Class,
+    ClassID INTEGER REFERENCES Class(ClassID),
 
     -- Booleans only have value on Departures --
     CONSTRAINT DepartureNulls CHECK (DepartureID IS NULL = (HasBoarded IS NULL AND HasEnteredBoardingZone IS NULL AND HasBoarded IS NULL)),
@@ -136,14 +138,14 @@ create table Ticket (
 create table Luggage (
     LuggageID INTEGER PRIMARY KEY,
     Weight INTEGER CHECK (Weight > 0),
-    TripID INTEGER REFERENCES Trip,
-    PersonID INTEGER REFERENCES Passenger
+    TripID INTEGER REFERENCES Trip(TripID),
+    PersonID INTEGER REFERENCES Passenger(PersonID)
 );
 
 create table Airplane (
     AirplaneID INTEGER PRIMARY KEY,
-    AirlineID INTEGER REFERENCES Airline,
-    ModelID INTEGER REFERENCES AirplaneModel,
+    AirlineID INTEGER REFERENCES Airline(AirlineID),
+    ModelID INTEGER REFERENCES AirplaneModel(ModelID),
     AirplaneName TEXT
 );
 
@@ -168,39 +170,39 @@ create table Workplace (
 );
 
 create table Gate (
-    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace,
+    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace(WorkplaceID),
     GateName TEXT UNIQUE,
     IsBoardingGate BOOLEAN NOT NULL CHECK (IsBoardingGate IN(0,1))
 );
 
 create table Runway (
-    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace,
+    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace(WorkplaceID),
     RunwayNum INTEGER UNIQUE
 );
 
 create table Desk (
-    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace
+    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace(WorkplaceID)
 );
 
 create table CheckInDesk (
-    DeskID INTEGER PRIMARY KEY REFERENCES Desk,
+    DeskID INTEGER PRIMARY KEY REFERENCES Desk(WorkplaceID),
     CheckInName TEXT UNIQUE
 );
 
 create table HelpDesk (
-    DeskID INTEGER PRIMARY KEY REFERENCES Desk,
+    DeskID INTEGER PRIMARY KEY REFERENCES Desk(WorkplaceID),
     OpenTime TIME,
     CloseTime TIME,
     CONSTRAINT CloseTimeAfter CHECK (OpenTime < CloseTime)
 );
 
 create table HasCheckInDesk (
-    AirlineID INTEGER REFERENCES Airline,
-    DeskID INTEGER REFERENCES CheckInDesk,
+    AirlineID INTEGER REFERENCES Airline(AirlineID),
+    DeskID INTEGER REFERENCES CheckInDesk(DeskID),
     PRIMARY KEY (AirlineID, DeskID)
 );
 
 create table LuggageBelt (
-    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace,
+    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace(WorkplaceID),
     BeltNum INTEGER UNIQUE
 );
