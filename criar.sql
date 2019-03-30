@@ -77,32 +77,35 @@ create table Trip (
 
 create table Departure (
     TripID INTEGER PRIMARY KEY REFERENCES Trip(TripID),
+    AirportCode TEXT NOT NULL REFERENCES Airport(AirportCode),
     DepartureDate DATE NOT NULL CHECK (LENGTH(DepartureDate) = 10),
     DepartureTime TIME NOT NULL CHECK (LENGTH(DepartureTime) = 5),
     ArrivalDate DATE NOT NULL CHECK (LENGTH(ArrivalDate) = 10),
     ArrivalTime TIME NOT NULL CHECK (LENGTH(ArrivalTime) = 5),
-    DurationHours REAL NOT NULL,
+    DurationHours INTEGER NOT NULL CHECK (DurationHours >= 0),
+    DurationMinutes INTEGER NOT NULL CHECK (DurationMinutes >= 0 AND DurationMinutes < 60),
     GateID INTEGER NOT NULL REFERENCES Gate(WorkplaceID),
     RunwayID INTEGER NOT NULL REFERENCES Runway(WorkplaceID),
     AirplaneID INTEGER NOT NULL REFERENCES Airplane(AirplaneID),
-    AirportCode TEXT NOT NULL REFERENCES Airport(AirportCode),
 
     CONSTRAINT AvailableGate UNIQUE(DepartureDate, DepartureTime, GateID),
     CONSTRAINT AvailableRunway UNIQUE(DepartureDate, DepartureTime, RunwayID),
-    CONSTRAINT AvailablePlane UNIQUE(DepartureDate, DepartureTime, AirplaneID)
+    CONSTRAINT AvailablePlane UNIQUE(DepartureDate, DepartureTime, AirplaneID),
+    CONSTRAINT FlightDuration CHECK (DurationHours > 0 OR DurationMinutes > 0)
 );
 
 create table Arrival (
     TripID INTEGER PRIMARY KEY REFERENCES Trip(TripID),
+    AirportCode TEXT NOT NULL REFERENCES Airport(AirportCode),
     DepartureDate DATE NOT NULL CHECK (LENGTH(DepartureDate) = 10),
     DepartureTime TIME NOT NULL CHECK (LENGTH(DepartureTime) = 5),
     ArrivalDate DATE NOT NULL CHECK (LENGTH(ArrivalDate) = 10),
     ArrivalTime TIME NOT NULL CHECK (LENGTH(ArrivalTime) = 5),
-    DurationHours REAL NOT NULL,
+    DurationHours INTEGER NOT NULL CHECK (DurationHours >= 0),
+    DurationMinutes INTEGER NOT NULL CHECK (DurationMinutes >= 0 AND DurationMinutes < 60),
     GateID INTEGER NOT NULL REFERENCES Gate(WorkplaceID),
     RunwayID INTEGER NOT NULL REFERENCES Runway(WorkplaceID),
     AirplaneID INTEGER NOT NULL REFERENCES Airplane(AirplaneID),
-    AirportCode TEXT NOT NULL REFERENCES Airport(AirportCode),
 
     BeltID INTEGER NOT NULL REFERENCES LuggageBelt(WorkplaceID),
     DropoffDate DATE NOT NULL,
@@ -111,7 +114,8 @@ create table Arrival (
     CONSTRAINT AvailableLuggageBelt UNIQUE (DropoffDate, DropoffTime, BeltID),
     CONSTRAINT AvailableGate UNIQUE(ArrivalDate, ArrivalTime, GateID),
     CONSTRAINT AvailableRunway UNIQUE(ArrivalDate, ArrivalTime, RunwayID),
-    CONSTRAINT AvailablePlane UNIQUE(DepartureDate, DepartureTime, AirplaneID)
+    CONSTRAINT AvailablePlane UNIQUE(DepartureDate, DepartureTime, AirplaneID),
+    CONSTRAINT FlightDuration CHECK (DurationHours > 0 OR DurationMinutes > 0)
 );
 
 create table Class (
@@ -133,8 +137,10 @@ create table Ticket (
 
     -- Booleans only have value on Departures --
     CONSTRAINT DepartureNulls CHECK (DepartureID IS NULL = (HasBoarded IS NULL AND HasEnteredBoardingZone IS NULL AND HasBoarded IS NULL)),
-    CONSTRAINT ArrivalXorDeparture CHECK (ArrivalID IS NULL <> DepartureID NOT NULL),
-    UNIQUE (PassengerID, ArrivalID, DepartureID)
+    CONSTRAINT ArrivalXorDeparture CHECK ((ArrivalID IS NULL) <> (DepartureID IS NULL)),
+
+    UNIQUE (PassengerID, ArrivalID, DepartureID), 
+    UNIQUE (SeatRow, SeatLetter, ArrivalID, DepartureID)
 );
 
 create table Luggage (
