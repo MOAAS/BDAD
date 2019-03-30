@@ -1,5 +1,3 @@
-PRAGMA foreign_keys = OFF;
-
 -- Apagar tabelas --
 drop table if exists Person;
 drop table if exists Employee;
@@ -25,8 +23,6 @@ drop table if exists HelpDesk;
 drop table if exists HasCheckInDesk;
 drop table if exists LuggageBelt;
 
-PRAGMA foreign_keys = ON;
-
 create table Person (
     PersonID INTEGER PRIMARY KEY,
     SSN TEXT UNIQUE,
@@ -50,7 +46,7 @@ create table Passenger (
 
 create table IsBoss (
     BossID INTEGER REFERENCES Employee,
-    BossedID INTEGER PRIMARY KEY REFERENCES Employee,
+    BossedID INTEGER PRIMARY KEY REFERENCES Employee ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT DifferentBoss CHECK (BossID <> BossedID)
 );
 
@@ -61,13 +57,13 @@ create table Country (
 
 create table City ( 
     CityID INTEGER PRIMARY KEY,
-    CountryID INTEGER REFERENCES Country,
+    CountryID INTEGER REFERENCES Country ON DELETE CASCADE ON UPDATE CASCADE,
     CityName TEXT
 );
 
 create table Airport (
     AirportCode TEXT PRIMARY KEY CHECK (LENGTH(AirportCode) = 3),
-    CityID INTEGER REFERENCES City,
+    CityID INTEGER REFERENCES City ON UPDATE CASCADE,
     AirportName TEXT
 );
 
@@ -107,16 +103,16 @@ create table Ticket (
     TripID INTEGER REFERENCES Trip,
     SeatRow INTEGER NOT NULL CHECK (SeatRow > 0),
     SeatLetter TEXT NOT NULL CHECK (LENGTH(SeatLetter) = 1),
-    HasCheckedIn BOOLEAN CHECK (HasCheckedIn IN(0,1)),
-    HasEnteredBoardingZone BOOLEAN CHECK (HasEnteredBoardingZone IN(0,1)),
-    HasBoarded BOOLEAN CHECK (HasBoarded IN(0,1)),
+    HasCheckedIn BOOLEAN CHECK (HasCheckedIn IN(0, 1, NULL)),
+    HasEnteredBoardingZone BOOLEAN CHECK (HasEnteredBoardingZone IN(0, 1, NULL)),
+    HasBoarded BOOLEAN CHECK (HasBoarded IN(0, 1, NULL)),
     ClassID INTEGER REFERENCES Class,
     PRIMARY KEY (PassengerID, TripID)
 );
 
 create table Luggage (
     LuggageID INTEGER PRIMARY KEY,
-    Weight INTEGER,
+    Weight INTEGER CHECK (Weight > 0),
     TripID INTEGER REFERENCES Trip,
     PersonID INTEGER REFERENCES Passenger
 );
@@ -147,8 +143,8 @@ create table Airline (
 create table AirplaneModel (
     ModelID INTEGER PRIMARY KEY,
     ModelName TEXT,
-    SeatsPerRow INTEGER,
-    NumRows INTEGER,
+    SeatsPerRow INTEGER CHECK (SeatsPerRow > 0),
+    NumRows INTEGER CHECK (NumRows > 0),
     Capacity INTEGER,
     CONSTRAINT CheckCapacity CHECK (SeatsPerRow * NumRows = Capacity)
 );

@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = ON;
+
 --- Country, Name ---
 insert into Country values(0, "Portugal");
 insert into Country values(1, "Spain");
