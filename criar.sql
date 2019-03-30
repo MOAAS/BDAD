@@ -22,7 +22,7 @@ drop table if exists Runway;
 drop table if exists Desk;
 drop table if exists CheckInDesk;
 drop table if exists HelpDesk;
-drop table if exists HasDesk;
+drop table if exists HasCheckInDesk;
 drop table if exists LuggageBelt;
 
 PRAGMA foreign_keys = ON;
@@ -51,7 +51,7 @@ create table Passenger (
 create table IsBoss (
     BossID INTEGER REFERENCES Employee,
     BossedID INTEGER PRIMARY KEY REFERENCES Employee,
-    CHECK (BossID <> BossedID)
+    CONSTRAINT DifferentBoss CHECK (BossID <> BossedID)
 );
 
 create table Country (
@@ -82,7 +82,19 @@ create table Trip (
     GateID INTEGER NOT NULL REFERENCES Gate,
     RunwayID INTEGER NOT NULL REFERENCES Runway,
     AirplaneID INTEGER NOT NULL REFERENCES Airplane,
-    AirportID INTEGER NOT NULL REFERENCES Airport
+    AirportID INTEGER NOT NULL REFERENCES Airport,
+
+    -- LuggageDropoff ? deixamos aqui ?
+    BeltID INTEGER REFERENCES LuggageBelt,
+    DropoffDate DATE,
+    DropoffTime TIME,
+    UNIQUE (DropoffDate, DropoffTime, BeltID),
+    CONSTRAINT BeltConstraint CHECK (
+        IsDeparture = 1 AND BeltID IS NULL AND DropoffDate IS NULL AND DropoffTime IS NULL
+        OR
+        IsDeparture = 0 AND BeltID NOT NULL AND DropoffDate NOT NULL AND DropoffTime = NULL
+    )
+
 );
 
 create table Class (
@@ -93,8 +105,8 @@ create table Class (
 create table Ticket (
     PassengerID INTEGER REFERENCES Passenger,
     TripID INTEGER REFERENCES Trip,
-    SeatRow INTEGER NOT NULL CHECK (SeatRow > 0)
-    SeatLetter TEXT NOT NULL CHECK (LENGTH(SeatLetter) = 1)
+    SeatRow INTEGER NOT NULL CHECK (SeatRow > 0),
+    SeatLetter TEXT NOT NULL CHECK (LENGTH(SeatLetter) = 1),
     HasCheckedIn BOOLEAN CHECK (HasCheckedIn IN(0,1)),
     HasEnteredBoardingZone BOOLEAN CHECK (HasEnteredBoardingZone IN(0,1)),
     HasBoarded BOOLEAN CHECK (HasBoarded IN(0,1)),
@@ -104,9 +116,12 @@ create table Ticket (
 
 create table Luggage (
     LuggageID INTEGER PRIMARY KEY,
-    Weight INTEGER
+    Weight INTEGER,
+    TripID INTEGER REFERENCES Trip,
+    PersonID INTEGER REFERENCES Passenger
 );
 
+/*
 create table LuggageDropOff (
     TripID INTEGER PRIMARY KEY REFERENCES Trip,
     BeltID INTEGER REFERENCES LuggageBelt,
@@ -114,17 +129,18 @@ create table LuggageDropOff (
     DropoffTime TIME,
     UNIQUE (DropoffDate, DropoffTime, BeltID)
 );
+*/
 
 create table Airplane (
     AirplaneID INTEGER PRIMARY KEY,
-    AirplaneName TEXT UNIQUE,
     AirlineID INTEGER REFERENCES Airline,
-    ModelID INTEGER REFERENCES AirplaneModel
+    ModelID INTEGER REFERENCES AirplaneModel,
+    AirplaneName TEXT
 );
 
 create table Airline (
     AirlineID INTEGER PRIMARY KEY,
-    AirlineName TEXT,
+    AirlineName TEXT UNIQUE,
     PhoneNumber TEXT
 );
 
@@ -159,7 +175,7 @@ create table Desk (
 
 create table CheckInDesk (
     DeskID INTEGER PRIMARY KEY REFERENCES Desk,
-    CheckInNum INTEGER UNIQUE
+    CheckInName TEXT UNIQUE
 );
 
 create table HelpDesk (
@@ -169,7 +185,7 @@ create table HelpDesk (
     CONSTRAINT CloseTimeAfter CHECK (OpenTime < CloseTime)
 );
 
-create table HasDesk (
+create table HasCheckInDesk (
     AirlineID INTEGER REFERENCES Airline,
     DeskID INTEGER REFERENCES CheckInDesk,
     PRIMARY KEY (AirlineID, DeskID)
