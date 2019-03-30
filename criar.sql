@@ -7,6 +7,8 @@ drop table if exists Country;
 drop table if exists City;
 drop table if exists Airport;
 drop table if exists Trip;
+drop table if exists Arrival;
+drop table if exists Departure;
 drop table if exists Class;
 drop table if exists Ticket;
 drop table if exists Luggage;
@@ -68,29 +70,44 @@ create table Airport (
 );
 
 create table Trip (
-    TripID INTEGER PRIMARY KEY,
+    TripID INTEGER PRIMARY KEY
+);
+
+create table Departure (
+    TripID INTEGER PRIMARY KEY REFERENCES Trip,
     DepartureDate DATE NOT NULL,
     DepartureTime TIME NOT NULL,
     ArrivalDate DATE NOT NULL,
     ArrivalTime TIME NOT NULL,
     DurationHours REAL NOT NULL,
-    IsDeparture BOOLEAN NOT NULL CHECK (IsDeparture IN(0,1)),
     GateID INTEGER NOT NULL REFERENCES Gate,
     RunwayID INTEGER NOT NULL REFERENCES Runway,
     AirplaneID INTEGER NOT NULL REFERENCES Airplane,
     AirportID INTEGER NOT NULL REFERENCES Airport,
 
-    -- LuggageDropoff ? deixamos aqui ?
-    BeltID INTEGER REFERENCES LuggageBelt,
-    DropoffDate DATE,
-    DropoffTime TIME,
-    UNIQUE (DropoffDate, DropoffTime, BeltID),
-    CONSTRAINT BeltConstraint CHECK (
-        IsDeparture = 1 AND BeltID IS NULL AND DropoffDate IS NULL AND DropoffTime IS NULL
-        OR
-        IsDeparture = 0 AND BeltID NOT NULL AND DropoffDate NOT NULL AND DropoffTime = NULL
-    )
+    CONSTRAINT AvailableGate UNIQUE(DepartureDate, DepartureTime, GateID),
+    CONSTRAINT AvailableRunway UNIQUE(DepartureDate, DepartureTime, RunwayID)
+);
 
+create table Arrival (
+    TripID INTEGER PRIMARY KEY REFERENCES Trip,
+    DepartureDate DATE NOT NULL,
+    DepartureTime TIME NOT NULL,
+    ArrivalDate DATE NOT NULL,
+    ArrivalTime TIME NOT NULL,
+    DurationHours REAL NOT NULL,
+    GateID INTEGER NOT NULL REFERENCES Gate,
+    RunwayID INTEGER NOT NULL REFERENCES Runway,
+    AirplaneID INTEGER NOT NULL REFERENCES Airplane,
+    AirportID INTEGER NOT NULL REFERENCES Airport,
+
+    BeltID INTEGER NOT NULL REFERENCES LuggageBelt,
+    DropoffDate DATE NOT NULL,
+    DropoffTime TIME NOT NULL,
+
+    CONSTRAINT AvailableLuggageBelt UNIQUE (DropoffDate, DropoffTime, BeltID),
+    CONSTRAINT AvailableGate UNIQUE(ArrivalDate, ArrivalTime, GateID),
+    CONSTRAINT AvailableRunway UNIQUE(ArrivalDate, ArrivalTime, RunwayID)
 );
 
 create table Class (
@@ -99,15 +116,21 @@ create table Class (
 );
 
 create table Ticket (
-    PassengerID INTEGER REFERENCES Passenger,
-    TripID INTEGER REFERENCES Trip,
+    TicketID INTEGER PRIMARY KEY,
+    PassengerID INTEGER NOT NULL REFERENCES Passenger,
+    ArrivalID INTEGER REFERENCES Arrival,
+    DepartureID INTEGER REFERENCES Departure,    
     SeatRow INTEGER NOT NULL CHECK (SeatRow > 0),
     SeatLetter TEXT NOT NULL CHECK (LENGTH(SeatLetter) = 1),
     HasCheckedIn BOOLEAN CHECK (HasCheckedIn IN(0, 1, NULL)),
     HasEnteredBoardingZone BOOLEAN CHECK (HasEnteredBoardingZone IN(0, 1, NULL)),
     HasBoarded BOOLEAN CHECK (HasBoarded IN(0, 1, NULL)),
     ClassID INTEGER REFERENCES Class,
-    PRIMARY KEY (PassengerID, TripID)
+
+    -- Booleans only have value on Departures --
+    CONSTRAINT DepartureNulls CHECK (DepartureID IS NULL = (HasBoarded IS NULL AND HasEnteredBoardingZone IS NULL AND HasBoarded IS NULL)),
+    CONSTRAINT ArrivalXorDeparture CHECK (ArrivalID IS NULL <> DepartureID NOT NULL),
+    UNIQUE (PassengerID, ArrivalID, DepartureID)
 );
 
 create table Luggage (
@@ -116,16 +139,6 @@ create table Luggage (
     TripID INTEGER REFERENCES Trip,
     PersonID INTEGER REFERENCES Passenger
 );
-
-/*
-create table LuggageDropOff (
-    TripID INTEGER PRIMARY KEY REFERENCES Trip,
-    BeltID INTEGER REFERENCES LuggageBelt,
-    DropoffDate DATE,
-    DropoffTime TIME,
-    UNIQUE (DropoffDate, DropoffTime, BeltID)
-);
-*/
 
 create table Airplane (
     AirplaneID INTEGER PRIMARY KEY,
