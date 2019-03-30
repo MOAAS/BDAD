@@ -1,2 +1,7 @@
 *.lck
 *.bak*
+sqldiff.exe
+sqlite3.exe
+sqlite3_analyzer.exe
+~$latorioBDAD.docx
+~WRL3483.tmp
