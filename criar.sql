@@ -50,7 +50,7 @@ create table Passenger (
 
 create table IsBoss (
     BossID INTEGER REFERENCES Employee(PersonID),
-    BossedID INTEGER PRIMARY KEY REFERENCES Employee(PersonID) ON DELETE CASCADE ON UPDATE CASCADE,
+    BossedID INTEGER PRIMARY KEY REFERENCES Employee(PersonID),
     CONSTRAINT DifferentBoss CHECK (BossID <> BossedID)
 );
 
