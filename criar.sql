@@ -38,7 +38,7 @@ create table Person (
 
 create table Employee (
     PersonID INTEGER PRIMARY KEY REFERENCES Person(PersonID),
-    Salary REAL CHECK (Salary > 0),
+    Salary REAL CHECK (Salary >= 600),
     NIF TEXT UNIQUE,
     WorkplaceID INTEGER REFERENCES Workplace(WorkplaceID)
 );
@@ -124,23 +124,25 @@ create table Class (
 );
 
 create table Ticket (
-    TicketID INTEGER PRIMARY KEY,
     PassengerID INTEGER NOT NULL REFERENCES Passenger(PersonID),
-    ArrivalID INTEGER REFERENCES Arrival(TripID),
-    DepartureID INTEGER REFERENCES Departure(TripID),    
-    SeatRow INTEGER NOT NULL CHECK (SeatRow > 0),
-    SeatLetter TEXT NOT NULL CHECK (LENGTH(SeatLetter) = 1),
+    TripID INTEGER REFERENCES Trip(TripID),
+    SeatRow INTEGER CHECK (SeatRow > 0),
+    SeatLetter TEXT CHECK (LENGTH(SeatLetter) = 1),
     HasCheckedIn BOOLEAN CHECK (HasCheckedIn IN(0, 1, NULL)),
     HasEnteredBoardingZone BOOLEAN CHECK (HasEnteredBoardingZone IN(0, 1, NULL)),
     HasBoarded BOOLEAN CHECK (HasBoarded IN(0, 1, NULL)),
     ClassID INTEGER REFERENCES Class(ClassID),
 
-    -- Booleans only have value on Departures --
-    CONSTRAINT DepartureNulls CHECK (DepartureID IS NULL = (HasBoarded IS NULL AND HasEnteredBoardingZone IS NULL AND HasBoarded IS NULL)),
-    CONSTRAINT ArrivalXorDeparture CHECK ((ArrivalID IS NULL) <> (DepartureID IS NULL)),
+    PRIMARY KEY (SeatRow, SeatLetter, TripID)
 
-    UNIQUE (PassengerID, ArrivalID, DepartureID), 
-    UNIQUE (SeatRow, SeatLetter, ArrivalID, DepartureID)
+    /*-- Booleans only have value on Departures --
+    
+    ******** Eu pus "ArrivalID" e "DepartureID" tudo em "TripID", se houver razao para diferenciar apita ******
+
+    CONSTRAINT DepartureNulls CHECK (DepartureID IS NULL = (HasBoarded IS NULL AND HasEnteredBoardingZone IS NULL AND HasBoarded IS NULL)),
+    CONSTRAINT ArrivalXorDeparture CHECK ((ArrivalID IS NULL) <> (DepartureID IS NULL)),*/
+
+    UNIQUE (PassengerID, TripID)
 );
 
 create table Luggage (

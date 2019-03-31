@@ -758,50 +758,50 @@ insert into Luggage values(39, 21, 38, 29);
 
 -- TicketID, PassengerID, ArrivalID, DepartureID, SeatRow, SeatLetter, HasCheckedIn, HasEnteredBoardingZone, HasBoarded, ClassID --
 
-insert into Ticket values(00, 08, NULL, 6, 12, "B", 0, 0, 0, 1);
-insert into Ticket values(01, 09, NULL, 6, 16, "E", 0, 0, 0, 2);
-insert into Ticket values(02, 10, NULL, 6, 18, "C", 0, 0, 0, 3);
-insert into Ticket values(03, 11, NULL, 6, 05, "E", 0, 0, 0, 0);
-insert into Ticket values(04, 12, NULL, 6, 08, "A", 0, 0, 0, 1);
-insert into Ticket values(05, 13, NULL, 6, 08, "B", 0, 0, 0, 3);
-insert into Ticket values(06, 14, NULL, 6, 11, "D", 0, 0, 0, 1);
-insert into Ticket values(07, 15, NULL, 6, 11, "C", 0, 0, 0, 3);
+insert into Ticket values(08, 6, 12, "B", 0, 0, 0, 1);
+insert into Ticket values(09, 6, 16, "E", 0, 0, 0, 2);
+insert into Ticket values(10, 6, 18, "C", 0, 0, 0, 3);
+insert into Ticket values(11, 6, 05, "E", 0, 0, 0, 0);
+insert into Ticket values(12, 6, 08, "A", 0, 0, 0, 1);
+insert into Ticket values(13, 6, 08, "B", 0, 0, 0, 3);
+insert into Ticket values(14, 6, 11, "D", 0, 0, 0, 1);
+insert into Ticket values(15, 6, 11, "C", 0, 0, 0, 3);
 
-insert into Ticket values(08, 16, NULL, 11, 12, "B", 0, 0, 0, 1);
-insert into Ticket values(09, 17, NULL, 11, 16, "E", 0, 0, 0, 1);
-insert into Ticket values(10, 18, NULL, 11, 18, "C", 0, 0, 0, 0);
-insert into Ticket values(11, 19, NULL, 11, 05, "E", 0, 0, 0, 3);
-insert into Ticket values(12, 20, NULL, 11, 08, "A", 0, 0, 0, 3);
-insert into Ticket values(13, 21, NULL, 11, 08, "B", 0, 0, 0, 0);
-insert into Ticket values(14, 22, NULL, 11, 11, "D", 0, 0, 0, 2);
-insert into Ticket values(15, 23, NULL, 11, 11, "C", 0, 0, 0, 2);
+insert into Ticket values(16, 11, 12, "B", 0, 0, 0, 1);
+insert into Ticket values(17, 11, 16, "E", 0, 0, 0, 1);
+insert into Ticket values(18, 11, 18, "C", 0, 0, 0, 0);
+insert into Ticket values(19, 11, 05, "E", 0, 0, 0, 3);
+insert into Ticket values(20, 11, 08, "A", 0, 0, 0, 3);
+insert into Ticket values(21, 11, 08, "B", 0, 0, 0, 0);
+insert into Ticket values(22, 11, 11, "D", 0, 0, 0, 2);
+insert into Ticket values(23, 11, 11, "C", 0, 0, 0, 2);
 
-insert into Ticket values(16, 22, NULL, 17, 12, "B", 0, 0, 0, 1);
-insert into Ticket values(17, 23, NULL, 17, 16, "E", 0, 0, 0, 0);
-insert into Ticket values(18, 24, NULL, 17, 18, "C", 0, 0, 0, 0);
-insert into Ticket values(19, 25, NULL, 17, 05, "E", 0, 0, 0, 1);
-insert into Ticket values(20, 26, NULL, 17, 08, "A", 0, 0, 0, 1);
-insert into Ticket values(21, 27, NULL, 17, 08, "B", 0, 0, 0, 0);
-insert into Ticket values(22, 28, NULL, 17, 11, "D", 0, 0, 0, 2);
-insert into Ticket values(23, 29, NULL, 17, 11, "C", 0, 0, 0, 2);
+insert into Ticket values(22, 17, 12, "B", 0, 0, 0, 1);
+insert into Ticket values(23, 17, 16, "E", 0, 0, 0, 0);
+insert into Ticket values(24, 17, 18, "C", 0, 0, 0, 0);
+insert into Ticket values(25, 17, 05, "E", 0, 0, 0, 1);
+insert into Ticket values(26, 17, 08, "A", 0, 0, 0, 1);
+insert into Ticket values(27, 17, 08, "B", 0, 0, 0, 0);
+insert into Ticket values(28, 17, 11, "D", 0, 0, 0, 2);
+insert into Ticket values(29, 17, 11, "C", 0, 0, 0, 2);
 
-insert into Ticket values(24, 08, 26, NULL, 12, "B", NULL, NULL, NULL, 1);
-insert into Ticket values(25, 09, 26, NULL, 16, "E", NULL, NULL, NULL, 0);
-insert into Ticket values(26, 10, 26, NULL, 18, "C", NULL, NULL, NULL, 0);
-insert into Ticket values(27, 11, 26, NULL, 05, "E", NULL, NULL, NULL, 0);
-insert into Ticket values(28, 12, 26, NULL, 08, "A", NULL, NULL, NULL, 2);
-insert into Ticket values(29, 13, 26, NULL, 08, "B", NULL, NULL, NULL, 3);
-insert into Ticket values(30, 14, 26, NULL, 11, "D", NULL, NULL, NULL, 0);
-insert into Ticket values(31, 15, 26, NULL, 11, "C", NULL, NULL, NULL, 1);
+insert into Ticket values(08, 26, 12, "B", NULL, NULL, NULL, 1);
+insert into Ticket values(09, 26, 16, "E", NULL, NULL, NULL, 0);
+insert into Ticket values(10, 26, 18, "C", NULL, NULL, NULL, 0);
+insert into Ticket values(11, 26, 05, "E", NULL, NULL, NULL, 0);
+insert into Ticket values(12, 26, 08, "A", NULL, NULL, NULL, 2);
+insert into Ticket values(13, 26, 08, "B", NULL, NULL, NULL, 3);
+insert into Ticket values(14, 26, 11, "D", NULL, NULL, NULL, 0);
+insert into Ticket values(15, 26, 11, "C", NULL, NULL, NULL, 1);
 
-insert into Ticket values(32, 22, 38, NULL, 12, "B", NULL, NULL, NULL, 2);
-insert into Ticket values(33, 23, 38, NULL, 16, "E", NULL, NULL, NULL, 1);
-insert into Ticket values(34, 24, 38, NULL, 18, "C", NULL, NULL, NULL, 1);
-insert into Ticket values(35, 25, 38, NULL, 05, "E", NULL, NULL, NULL, 0);
-insert into Ticket values(36, 26, 38, NULL, 08, "A", NULL, NULL, NULL, 2);
-insert into Ticket values(37, 27, 38, NULL, 08, "B", NULL, NULL, NULL, 3);
-insert into Ticket values(38, 28, 38, NULL, 11, "D", NULL, NULL, NULL, 2);
-insert into Ticket values(39, 29, 38, NULL, 11, "C", NULL, NULL, NULL, 0);
+insert into Ticket values(22, 38, 12, "B", NULL, NULL, NULL, 2);
+insert into Ticket values(23, 38, 16, "E", NULL, NULL, NULL, 1);
+insert into Ticket values(24, 38, 18, "C", NULL, NULL, NULL, 1);
+insert into Ticket values(25, 38, 05, "E", NULL, NULL, NULL, 0);
+insert into Ticket values(26, 38, 08, "A", NULL, NULL, NULL, 2);
+insert into Ticket values(27, 38, 08, "B", NULL, NULL, NULL, 3);
+insert into Ticket values(28, 38, 11, "D", NULL, NULL, NULL, 2);
+insert into Ticket values(29, 38, 11, "C", NULL, NULL, NULL, 0);
 
 
 
