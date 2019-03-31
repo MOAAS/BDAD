@@ -62,13 +62,17 @@ create table Country (
 create table City ( 
     CityID INTEGER PRIMARY KEY,
     CountryID INTEGER REFERENCES Country(CountryID) ON DELETE CASCADE ON UPDATE CASCADE,
-    CityName TEXT
+    CityName TEXT,
+
+    UNIQUE(CityName, CountryID)
 );
 
 create table Airport (
     AirportCode TEXT PRIMARY KEY CHECK (LENGTH(AirportCode) = 3),
     CityID INTEGER REFERENCES City(CityID) ON UPDATE CASCADE,
-    AirportName TEXT
+    AirportName TEXT,
+
+    UNIQUE(AirportName, CityID)
 );
 
 create table Trip (
@@ -133,7 +137,7 @@ create table Ticket (
     HasBoarded BOOLEAN CHECK (HasBoarded IN(0, 1, NULL)),
     ClassID INTEGER REFERENCES Class(ClassID),
 
-    PRIMARY KEY (SeatRow, SeatLetter, TripID)
+    UNIQUE (SeatRow, SeatLetter, TripID)
 
     /*-- Booleans only have value on Departures --
     
@@ -142,7 +146,7 @@ create table Ticket (
     CONSTRAINT DepartureNulls CHECK (DepartureID IS NULL = (HasBoarded IS NULL AND HasEnteredBoardingZone IS NULL AND HasBoarded IS NULL)),
     CONSTRAINT ArrivalXorDeparture CHECK ((ArrivalID IS NULL) <> (DepartureID IS NULL)),*/
 
-    UNIQUE (PassengerID, TripID)
+    PRIMARY KEY (PassengerID, TripID)
 );
 
 create table Luggage (
@@ -162,16 +166,14 @@ create table Airplane (
 create table Airline (
     AirlineID INTEGER PRIMARY KEY,
     AirlineName TEXT UNIQUE,
-    PhoneNumber TEXT
+    PhoneNumber TEXT UNIQUE,
 );
 
 create table AirplaneModel (
     ModelID INTEGER PRIMARY KEY,
     ModelName TEXT,
     SeatsPerRow INTEGER CHECK (SeatsPerRow > 0),
-    NumRows INTEGER CHECK (NumRows > 0),
-    Capacity INTEGER,
-    CONSTRAINT CheckCapacity CHECK (SeatsPerRow * NumRows = Capacity)
+    NumRows INTEGER CHECK (NumRows > 0)
 );
 
 create table Workplace (
