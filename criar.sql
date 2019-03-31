@@ -166,7 +166,7 @@ create table Airplane (
 create table Airline (
     AirlineID INTEGER PRIMARY KEY,
     AirlineName TEXT UNIQUE,
-    PhoneNumber TEXT UNIQUE,
+    PhoneNumber TEXT UNIQUE
 );
 
 create table AirplaneModel (

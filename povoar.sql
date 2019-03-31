@@ -435,39 +435,39 @@ insert into Class values(3, "Business");
 
 -- ModelID, ModelName, SeatsPerRow, NumRows, Capacity --
 
-insert into AirplaneModel values(0, "Airbus A333-300", 7, 40, 280);
-insert into AirplaneModel values(1, "Airbus A340-300", 7, 45, 315);
-insert into AirplaneModel values(2, "Airbus A340-500", 7, 50, 350);
-insert into AirplaneModel values(3, "Airbus A350-900", 9, 50, 450);
-insert into AirplaneModel values(4, "Boeing 777-200", 9, 50, 450);
-insert into AirplaneModel values(5, "Airbus A340-600", 10, 50, 500);
-insert into AirplaneModel values(6, "Boeing 777-300", 10, 55, 550);
-insert into AirplaneModel values(7, "Boeing 747-400", 10, 60, 600);
-insert into AirplaneModel values(8, "Boeing 747-8", 10, 70, 700);
-insert into AirplaneModel values(9, "Airbus A380-800", 10, 80, 800);
+insert into AirplaneModel values(0, "Airbus A333-300", 7, 40);
+insert into AirplaneModel values(1, "Airbus A340-300", 7, 45);
+insert into AirplaneModel values(2, "Airbus A340-500", 7, 50);
+insert into AirplaneModel values(3, "Airbus A350-900", 9, 50);
+insert into AirplaneModel values(4, "Boeing 777-200", 9, 50);
+insert into AirplaneModel values(5, "Airbus A340-600", 10, 50);
+insert into AirplaneModel values(6, "Boeing 777-300", 10, 55);
+insert into AirplaneModel values(7, "Boeing 747-400", 10, 60);
+insert into AirplaneModel values(8, "Boeing 747-8", 10, 70);
+insert into AirplaneModel values(9, "Airbus A380-800", 10, 80);
 
 -- AirlineID, Name, PhoneNumber --
 
 insert into Airline values(00, "TAP Air Portugal",  "218431100");
-insert into Airline values(01, "Ryanair",           "218431100");
-insert into Airline values(02, "Easy Jet",          "218431100");
-insert into Airline values(03, "Lufthansa",         "218431100");
-insert into Airline values(04, "Air France",        "218431100");
-insert into Airline values(05, "Aeroflot",          "218431100");
-insert into Airline values(06, "Turkish Airlines",  "218431100");
-insert into Airline values(07, "Alitalia",          "218431100");
-insert into Airline values(08, "Emirates",          "218431100");
-insert into Airline values(09, "Air Europa",        "218431100");
-insert into Airline values(10, "Iberia",            "218431100");
-insert into Airline values(11, "Qantas",            "218431100");
-insert into Airline values(12, "Japan Airlines",    "218431100");
-insert into Airline values(13, "Qatar Airways",     "218431100");
-insert into Airline values(14, "Finnair",           "218431100");
-insert into Airline values(15, "British Airways",   "218431100");
-insert into Airline values(16, "Swiss Air",         "218431100");
-insert into Airline values(17, "Air Canada",        "218431100");
-insert into Airline values(18, "jetBlue",           "218431100");
-insert into Airline values(19, "Bulgaria Air",      "218431100");
+insert into Airline values(01, "Ryanair",           "210123543");
+insert into Airline values(02, "Easy Jet",          "212124965");
+insert into Airline values(03, "Lufthansa",         "219188762");
+insert into Airline values(04, "Air France",        "216829610");
+insert into Airline values(05, "Aeroflot",          "210717901");
+insert into Airline values(06, "Turkish Airlines",  "218973907");
+insert into Airline values(07, "Alitalia",          "214160757");
+insert into Airline values(08, "Emirates",          "215473271");
+insert into Airline values(09, "Air Europa",        "211933556");
+insert into Airline values(10, "Iberia",            "218962833");
+insert into Airline values(11, "Qantas",            "213441105");
+insert into Airline values(12, "Japan Airlines",    "211329667");
+insert into Airline values(13, "Qatar Airways",     "214148078");
+insert into Airline values(14, "Finnair",           "219229334");
+insert into Airline values(15, "British Airways",   "211804215");
+insert into Airline values(16, "Swiss Air",         "218748522");
+insert into Airline values(17, "Air Canada",        "217276878");
+insert into Airline values(18, "jetBlue",           "211180235");
+insert into Airline values(19, "Bulgaria Air",      "214754897");
 
 -- AirplaneID, AirlineID, ModelID, Name --
 
