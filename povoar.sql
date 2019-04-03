@@ -146,33 +146,6 @@ insert into Workplace values(51, "Gate 18");
 insert into Workplace values(52, "Gate 19");
 insert into Workplace values(53, "Gate 20");
 
--- WorkplaceID --
-
-insert into Desk values(00);
-insert into Desk values(01);
-insert into Desk values(02);
-insert into Desk values(03);
-insert into Desk values(04);
-insert into Desk values(05);
-insert into Desk values(06);
-insert into Desk values(07);
-insert into Desk values(08);
-insert into Desk values(09);
-insert into Desk values(10);
-insert into Desk values(11);
-insert into Desk values(12);
-insert into Desk values(13);
-insert into Desk values(14);
-insert into Desk values(15);
-insert into Desk values(16);
-insert into Desk values(17);
-insert into Desk values(18);
-insert into Desk values(19);
-insert into Desk values(20);
-insert into Desk values(21);
-insert into Desk values(22);
-insert into Desk values(23);
-
 -- DeskID, OpenTime, CloseTime --
 
 insert into HelpDesk values(0, "10:00", "19:00");
@@ -624,94 +597,97 @@ insert into HasCheckInDesk values(17, 22);
 insert into HasCheckInDesk values(18, 23);
 insert into HasCheckInDesk values(19, 23);
 
--- TripID --
+-- TripID, AirportCode, DepartDate, DepartTime, ArriveDate, ArriveTime, Hours, Minutes, GateID, RunwayID, AirplaneID --
 
-insert into Trip values(00);
-insert into Trip values(01);
-insert into Trip values(02);
-insert into Trip values(03);
-insert into Trip values(04);
-insert into Trip values(05);
-insert into Trip values(06);
-insert into Trip values(07);
-insert into Trip values(08);
-insert into Trip values(09);
-insert into Trip values(10);
-insert into Trip values(11);
-insert into Trip values(12);
-insert into Trip values(13);
-insert into Trip values(14);
-insert into Trip values(15);
-insert into Trip values(16);
-insert into Trip values(17);
-insert into Trip values(18);
-insert into Trip values(19);
-insert into Trip values(20);
-insert into Trip values(21);
-insert into Trip values(22);
-insert into Trip values(23);
-insert into Trip values(24);
-insert into Trip values(25);
-insert into Trip values(26);
-insert into Trip values(27);
-insert into Trip values(28);
-insert into Trip values(29);
-insert into Trip values(30);
-insert into Trip values(31);
-insert into Trip values(32);
-insert into Trip values(33);
-insert into Trip values(34);
-insert into Trip values(35);
-insert into Trip values(36);
-insert into Trip values(37);
-insert into Trip values(38);
-insert into Trip values(39);
+-- Departures --
+insert into Trip values(00, "LIS", "2019-04-10", "15:30", "2019-04-10", "16:30", 01, 00, 34, 24, 00); -- Tap Portugal
+insert into Trip values(01, "OPO", "2019-04-11", "15:30", "2019-04-11", "15:45", 00, 15, 34, 24, 00); -- Tap Portugal
+insert into Trip values(02, "GVA", "2019-05-15", "02:40", "2019-05-15", "05:40", 02, 00, 34, 24, 32); -- Swiss Air
+insert into Trip values(03, "JFK", "2019-05-16", "19:40", "2019-05-16", "23:55", 08, 15, 34, 24, 18); -- Air Europa
+insert into Trip values(04, "CPH", "2019-05-17", "12:40", "2019-05-17", "16:50", 03, 10, 34, 24, 02); -- EasyJet
+insert into Trip values(05, "FRA", "2019-05-20", "23:40", "2019-05-21", "03:00", 02, 20, 34, 24, 06); -- Lufthansa
+insert into Trip values(06, "YYZ", "2019-05-24", "05:40", "2019-05-24", "10:30", 08, 50, 34, 24, 34); -- Air Canada
+insert into Trip values(07, "FCO", "2019-05-30", "14:40", "2019-05-30", "18:10", 02, 30, 34, 24, 14); -- Ryanair
+insert into Trip values(08, "JFK", "2019-06-01", "22:00", "2019-06-02", "02:20", 08, 20, 34, 24, 32); -- Swiss Air
+insert into Trip values(09, "DXB", "2019-06-03", "15:40", "2019-06-04", "03:25", 07, 45, 34, 24, 16); -- Emirates
+insert into Trip values(10, "MAD", "2019-06-04", "11:25", "2019-06-04", "13:15", 00, 50, 34, 24, 02); -- Ryanair
+insert into Trip values(11, "BER", "2019-06-04", "11:25", "2019-06-04", "15:15", 02, 50, 35, 25, 03); -- Ryanair
+insert into Trip values(12, "AMS", "2019-06-04", "11:25", "2019-06-04", "14:45", 02, 20, 36, 26, 04); -- EasyJet
+insert into Trip values(13, "BRU", "2019-06-05", "11:25", "2019-06-05", "14:35", 02, 10, 34, 24, 03); -- Ryanair
+insert into Trip values(14, "MAD", "2019-06-05", "11:25", "2019-06-05", "13:25", 01, 00, 35, 25, 04); -- EasyJet
+insert into Trip values(15, "GVA", "2019-06-05", "11:25", "2019-06-05", "14:25", 02, 00, 36, 26, 05); -- EasyJet
+insert into Trip values(16, "FRA", "2019-06-06", "11:25", "2019-06-06", "14:45", 02, 20, 34, 24, 02); -- Ryanair
+insert into Trip values(17, "FCO", "2019-06-06", "11:25", "2019-06-06", "14:45", 02, 20, 35, 25, 03); -- Ryanair
+insert into Trip values(18, "MAD", "2019-06-06", "11:25", "2019-06-06", "13:10", 00, 45, 36, 26, 04); -- EasyJet
+insert into Trip values(19, "BSB", "2019-06-10", "11:25", "2019-06-10", "18:40", 10, 15, 34, 24, 01); -- TAP
+
+-- Arrivals --
+insert into Trip values(20, "LIS", "2019-04-10", "19:30", "2019-04-10", "20:30", 01, 00, 34, 24, 00); -- Tap Portugal
+insert into Trip values(21, "OPO", "2019-04-11", "19:30", "2019-04-11", "19:45", 00, 15, 34, 24, 00); -- Tap Portugal
+insert into Trip values(22, "GVA", "2019-05-15", "06:40", "2019-05-15", "07:40", 02, 00, 34, 24, 32); -- Swiss Air
+insert into Trip values(23, "JFK", "2019-05-16", "23:40", "2019-05-17", "11:55", 08, 15, 34, 24, 18); -- Air Europa
+insert into Trip values(24, "CPH", "2019-05-17", "16:40", "2019-05-17", "18:50", 03, 10, 34, 24, 02); -- EasyJet
+insert into Trip values(25, "FRA", "2019-05-20", "03:40", "2019-05-21", "05:00", 02, 20, 34, 24, 06); -- Lufthansa
+insert into Trip values(26, "YYZ", "2019-05-24", "09:40", "2019-05-24", "14:30", 08, 50, 34, 24, 34); -- Air Canada
+insert into Trip values(27, "FCO", "2019-05-30", "18:40", "2019-05-30", "20:10", 02, 30, 34, 24, 14); -- Ryanair
+insert into Trip values(28, "JFK", "2019-06-01", "02:00", "2019-06-02", "14:20", 08, 20, 34, 24, 32); -- Swiss Air
+insert into Trip values(29, "DXB", "2019-06-03", "19:40", "2019-06-03", "23:25", 07, 45, 34, 24, 16); -- Emirates
+insert into Trip values(30, "MAD", "2019-06-04", "15:25", "2019-06-04", "15:15", 00, 50, 34, 24, 02); -- Ryanair
+insert into Trip values(31, "BER", "2019-06-04", "15:25", "2019-06-04", "17:15", 02, 50, 35, 25, 03); -- Ryanair
+insert into Trip values(32, "AMS", "2019-06-04", "15:25", "2019-06-04", "16:45", 02, 20, 36, 26, 04); -- EasyJet
+insert into Trip values(33, "BRU", "2019-06-05", "15:25", "2019-06-05", "16:35", 02, 10, 34, 24, 03); -- Ryanair
+insert into Trip values(34, "MAD", "2019-06-05", "15:25", "2019-06-05", "15:25", 01, 00, 35, 25, 04); -- EasyJet
+insert into Trip values(35, "GVA", "2019-06-05", "15:25", "2019-06-05", "16:25", 02, 00, 36, 26, 05); -- EasyJet
+insert into Trip values(36, "FRA", "2019-06-06", "15:25", "2019-06-06", "16:45", 02, 20, 34, 24, 02); -- Ryanair
+insert into Trip values(37, "FCO", "2019-06-06", "15:25", "2019-06-06", "16:45", 02, 20, 35, 25, 03); -- Ryanair
+insert into Trip values(38, "MAD", "2019-06-06", "15:25", "2019-06-06", "15:10", 00, 45, 36, 26, 04); -- EasyJet
+insert into Trip values(39, "BSB", "2019-06-10", "15:25", "2019-06-11", "04:40", 10, 15, 34, 24, 01); -- TAP
 
 -- Departures: 0 - 19, Arrivals: 20 - 39 --
 
--- TripID, AirportCode, DepartDate, DepartTime, ArriveDate, ArriveTime, Hours, Minutes, GateID, RunwayID, AirplaneID --
-insert into Departure values(00, "LIS", "2019-04-10", "15:30", "2019-04-10", "16:30", 1, 00, 34, 24, 00); -- Tap Portugal
-insert into Departure values(01, "OPO", "2019-04-11", "15:30", "2019-04-11", "15:45", 0, 15, 34, 24, 00); -- Tap Portugal
-insert into Departure values(02, "GVA", "2019-05-15", "02:40", "2019-05-15", "05:40", 2, 00, 34, 24, 32); -- Swiss Air
-insert into Departure values(03, "JFK", "2019-05-16", "19:40", "2019-05-16", "23:55", 8, 15, 34, 24, 18); -- Air Europa
-insert into Departure values(04, "CPH", "2019-05-17", "12:40", "2019-05-17", "16:50", 3, 10, 34, 24, 02); -- EasyJet
-insert into Departure values(05, "FRA", "2019-05-20", "23:40", "2019-05-21", "03:00", 2, 20, 34, 24, 06); -- Lufthansa
-insert into Departure values(06, "YYZ", "2019-05-24", "05:40", "2019-05-24", "10:30", 8, 50, 34, 24, 34); -- Air Canada
-insert into Departure values(07, "FCO", "2019-05-30", "14:40", "2019-05-30", "18:10", 2, 30, 34, 24, 14); -- Ryanair
-insert into Departure values(08, "JFK", "2019-06-01", "22:00", "2019-06-02", "02:20", 8, 20, 34, 24, 32); -- Swiss Air
-insert into Departure values(09, "DXB", "2019-06-03", "15:40", "2019-06-04", "03:25", 7, 45, 34, 24, 16); -- Emirates
-insert into Departure values(10, "MAD", "2019-06-04", "11:25", "2019-06-04", "13:15", 0, 50, 34, 24, 02); -- Ryanair
-insert into Departure values(11, "BER", "2019-06-04", "11:25", "2019-06-04", "15:15", 2, 50, 35, 25, 03); -- Ryanair
-insert into Departure values(12, "AMS", "2019-06-04", "11:25", "2019-06-04", "14:45", 2, 20, 36, 26, 04); -- EasyJet
-insert into Departure values(13, "BRU", "2019-06-05", "11:25", "2019-06-05", "14:35", 2, 10, 34, 24, 03); -- Ryanair
-insert into Departure values(14, "MAD", "2019-06-05", "11:25", "2019-06-05", "13:25", 1, 00, 35, 25, 04); -- EasyJet
-insert into Departure values(15, "GVA", "2019-06-05", "11:25", "2019-06-05", "14:25", 2, 00, 36, 26, 05); -- EasyJet
-insert into Departure values(16, "FRA", "2019-06-06", "11:25", "2019-06-06", "14:45", 2, 20, 34, 24, 02); -- Ryanair
-insert into Departure values(17, "FCO", "2019-06-06", "11:25", "2019-06-06", "14:45", 2, 20, 35, 25, 03); -- Ryanair
-insert into Departure values(18, "MAD", "2019-06-06", "11:25", "2019-06-06", "13:10", 0, 45, 36, 26, 04); -- EasyJet
-insert into Departure values(19, "BSB", "2019-06-10", "11:25", "2019-06-10", "18:40", 10, 15, 34, 24, 01); -- TAP
+-- TripID --
+insert into Departure values(00); 
+insert into Departure values(01); 
+insert into Departure values(02); 
+insert into Departure values(03); 
+insert into Departure values(04); 
+insert into Departure values(05); 
+insert into Departure values(06); 
+insert into Departure values(07); 
+insert into Departure values(08); 
+insert into Departure values(09); 
+insert into Departure values(10); 
+insert into Departure values(11); 
+insert into Departure values(12); 
+insert into Departure values(13); 
+insert into Departure values(14); 
+insert into Departure values(15); 
+insert into Departure values(16); 
+insert into Departure values(17); 
+insert into Departure values(18); 
+insert into Departure values(19); 
 
--- TripID, AirportCode, DepartDate, DepartTime, ArriveDate, ArriveTime, Hours, Minutes, GateID, RunwayID, AirplaneID, BeltID, DropoffDate, DropoffTime --
-insert into Arrival values(20, "LIS", "2019-04-10", "19:30", "2019-04-10", "20:30", 1, 00, 34, 24, 00, 29, "2019-04-10", "20:30"); -- Tap Portugal
-insert into Arrival values(21, "OPO", "2019-04-11", "19:30", "2019-04-11", "19:45", 0, 15, 34, 24, 00, 29, "2019-04-11", "19:45"); -- Tap Portugal
-insert into Arrival values(22, "GVA", "2019-05-15", "06:40", "2019-05-15", "07:40", 2, 00, 34, 24, 32, 29, "2019-05-15", "07:40"); -- Swiss Air
-insert into Arrival values(23, "JFK", "2019-05-16", "23:40", "2019-05-17", "11:55", 8, 15, 34, 24, 18, 29, "2019-05-17", "11:55"); -- Air Europa
-insert into Arrival values(24, "CPH", "2019-05-17", "16:40", "2019-05-17", "18:50", 3, 10, 34, 24, 02, 29, "2019-05-17", "18:50"); -- EasyJet
-insert into Arrival values(25, "FRA", "2019-05-20", "03:40", "2019-05-21", "05:00", 2, 20, 34, 24, 06, 29, "2019-05-21", "05:00"); -- Lufthansa
-insert into Arrival values(26, "YYZ", "2019-05-24", "09:40", "2019-05-24", "14:30", 8, 50, 34, 24, 34, 29, "2019-05-24", "14:30"); -- Air Canada
-insert into Arrival values(27, "FCO", "2019-05-30", "18:40", "2019-05-30", "20:10", 2, 30, 34, 24, 14, 29, "2019-05-30", "20:10"); -- Ryanair
-insert into Arrival values(28, "JFK", "2019-06-01", "02:00", "2019-06-02", "14:20", 8, 20, 34, 24, 32, 29, "2019-06-02", "14:20"); -- Swiss Air
-insert into Arrival values(29, "DXB", "2019-06-03", "19:40", "2019-06-03", "23:25", 7, 45, 34, 24, 16, 29, "2019-06-03", "23:25"); -- Emirates
-insert into Arrival values(30, "MAD", "2019-06-04", "15:25", "2019-06-04", "15:15", 0, 50, 34, 24, 02, 29, "2019-06-04", "15:15"); -- Ryanair
-insert into Arrival values(31, "BER", "2019-06-04", "15:25", "2019-06-04", "17:15", 2, 50, 35, 25, 03, 29, "2019-06-04", "17:15"); -- Ryanair
-insert into Arrival values(32, "AMS", "2019-06-04", "15:25", "2019-06-04", "16:45", 2, 20, 36, 26, 04, 29, "2019-06-04", "16:45"); -- EasyJet
-insert into Arrival values(33, "BRU", "2019-06-05", "15:25", "2019-06-05", "16:35", 2, 10, 34, 24, 03, 29, "2019-06-05", "16:35"); -- Ryanair
-insert into Arrival values(34, "MAD", "2019-06-05", "15:25", "2019-06-05", "15:25", 1, 00, 35, 25, 04, 29, "2019-06-05", "15:25"); -- EasyJet
-insert into Arrival values(35, "GVA", "2019-06-05", "15:25", "2019-06-05", "16:25", 2, 00, 36, 26, 05, 29, "2019-06-05", "16:25"); -- EasyJet
-insert into Arrival values(36, "FRA", "2019-06-06", "15:25", "2019-06-06", "16:45", 2, 20, 34, 24, 02, 29, "2019-06-06", "16:45"); -- Ryanair
-insert into Arrival values(37, "FCO", "2019-06-06", "15:25", "2019-06-06", "16:45", 2, 20, 35, 25, 03, 30, "2019-06-06", "16:45"); -- Ryanair
-insert into Arrival values(38, "MAD", "2019-06-06", "15:25", "2019-06-06", "15:10", 0, 45, 36, 26, 04, 29, "2019-06-06", "15:10"); -- EasyJet
-insert into Arrival values(39, "BSB", "2019-06-10", "15:25", "2019-06-11", "04:40", 10, 15, 34, 24, 01, 29, "2019-06-11", "04:40"); -- TAP
+-- TripID, BeltID, DropoffDate, DropoffTime --
+insert into Arrival values(20, 29, "2019-04-10", "20:30");
+insert into Arrival values(21, 29, "2019-04-11", "19:45");
+insert into Arrival values(22, 29, "2019-05-15", "07:40");
+insert into Arrival values(23, 29, "2019-05-17", "11:55");
+insert into Arrival values(24, 29, "2019-05-17", "18:50");
+insert into Arrival values(25, 29, "2019-05-21", "05:00");
+insert into Arrival values(26, 29, "2019-05-24", "14:30");
+insert into Arrival values(27, 29, "2019-05-30", "20:10");
+insert into Arrival values(28, 29, "2019-06-02", "14:20");
+insert into Arrival values(29, 29, "2019-06-03", "23:25");
+insert into Arrival values(30, 29, "2019-06-04", "15:15");
+insert into Arrival values(31, 29, "2019-06-04", "17:15");
+insert into Arrival values(32, 29, "2019-06-04", "16:45");
+insert into Arrival values(33, 29, "2019-06-05", "16:35");
+insert into Arrival values(34, 29, "2019-06-05", "15:25");
+insert into Arrival values(35, 29, "2019-06-05", "16:25");
+insert into Arrival values(36, 29, "2019-06-06", "16:45");
+insert into Arrival values(37, 30, "2019-06-06", "16:45");
+insert into Arrival values(38, 29, "2019-06-06", "15:10");
+insert into Arrival values(39, 29, "2019-06-11", "04:40");
 
 -- ID, Weight, Trip, Person --
 

@@ -21,7 +21,6 @@ drop table if exists AirplaneModel;
 drop table if exists Workplace;
 drop table if exists Gate;
 drop table if exists Runway;
-drop table if exists Desk;
 drop table if exists CheckInDesk;
 drop table if exists HelpDesk;
 drop table if exists HasCheckInDesk;
@@ -76,11 +75,7 @@ create table Airport (
 );
 
 create table Trip (
-    TripID INTEGER PRIMARY KEY
-);
-
-create table Departure (
-    TripID INTEGER PRIMARY KEY REFERENCES Trip(TripID),
+    TripID INTEGER PRIMARY KEY,
     AirportCode TEXT NOT NULL REFERENCES Airport(AirportCode),
     DepartureDate DATE NOT NULL CHECK (LENGTH(DepartureDate) = 10),
     DepartureTime TIME NOT NULL CHECK (LENGTH(DepartureTime) = 5),
@@ -92,34 +87,20 @@ create table Departure (
     RunwayID INTEGER NOT NULL REFERENCES Runway(WorkplaceID),
     AirplaneID INTEGER NOT NULL REFERENCES Airplane(AirplaneID),
 
-    CONSTRAINT AvailableGate UNIQUE(DepartureDate, DepartureTime, GateID),
-    CONSTRAINT AvailableRunway UNIQUE(DepartureDate, DepartureTime, RunwayID),
-    CONSTRAINT AvailablePlane UNIQUE(DepartureDate, DepartureTime, AirplaneID),
     CONSTRAINT FlightDuration CHECK (DurationHours > 0 OR DurationMinutes > 0)
+);
+
+create table Departure (
+    TripID INTEGER PRIMARY KEY REFERENCES Trip(TripID)
 );
 
 create table Arrival (
     TripID INTEGER PRIMARY KEY REFERENCES Trip(TripID),
-    AirportCode TEXT NOT NULL REFERENCES Airport(AirportCode),
-    DepartureDate DATE NOT NULL CHECK (LENGTH(DepartureDate) = 10),
-    DepartureTime TIME NOT NULL CHECK (LENGTH(DepartureTime) = 5),
-    ArrivalDate DATE NOT NULL CHECK (LENGTH(ArrivalDate) = 10),
-    ArrivalTime TIME NOT NULL CHECK (LENGTH(ArrivalTime) = 5),
-    DurationHours INTEGER NOT NULL CHECK (DurationHours >= 0),
-    DurationMinutes INTEGER NOT NULL CHECK (DurationMinutes >= 0 AND DurationMinutes < 60),
-    GateID INTEGER NOT NULL REFERENCES Gate(WorkplaceID),
-    RunwayID INTEGER NOT NULL REFERENCES Runway(WorkplaceID),
-    AirplaneID INTEGER NOT NULL REFERENCES Airplane(AirplaneID),
-
     BeltID INTEGER NOT NULL REFERENCES LuggageBelt(WorkplaceID),
     DropoffDate DATE NOT NULL,
     DropoffTime TIME NOT NULL,
 
-    CONSTRAINT AvailableLuggageBelt UNIQUE (DropoffDate, DropoffTime, BeltID),
-    CONSTRAINT AvailableGate UNIQUE(ArrivalDate, ArrivalTime, GateID),
-    CONSTRAINT AvailableRunway UNIQUE(ArrivalDate, ArrivalTime, RunwayID),
-    CONSTRAINT AvailablePlane UNIQUE(DepartureDate, DepartureTime, AirplaneID),
-    CONSTRAINT FlightDuration CHECK (DurationHours > 0 OR DurationMinutes > 0)
+    CONSTRAINT AvailableLuggageBelt UNIQUE (DropoffDate, DropoffTime, BeltID)
 );
 
 create table Class (
@@ -192,17 +173,13 @@ create table Runway (
     RunwayNum INTEGER UNIQUE
 );
 
-create table Desk (
-    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace(WorkplaceID)
-);
-
 create table CheckInDesk (
-    DeskID INTEGER PRIMARY KEY REFERENCES Desk(WorkplaceID),
+    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace(WorkplaceID),
     CheckInName TEXT UNIQUE
 );
 
 create table HelpDesk (
-    DeskID INTEGER PRIMARY KEY REFERENCES Desk(WorkplaceID),
+    WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace(WorkplaceID),
     OpenTime TIME,
     CloseTime TIME,
     CONSTRAINT CloseTimeAfter CHECK (OpenTime < CloseTime)
@@ -210,7 +187,7 @@ create table HelpDesk (
 
 create table HasCheckInDesk (
     AirlineID INTEGER REFERENCES Airline(AirlineID),
-    DeskID INTEGER REFERENCES CheckInDesk(DeskID),
+    DeskID INTEGER REFERENCES CheckInDesk(WorkplaceID),
     PRIMARY KEY (AirlineID, DeskID)
 );
 
