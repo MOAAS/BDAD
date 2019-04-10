@@ -32,7 +32,7 @@ create table Person (
     PersonName TEXT NOT NULL,
     BirthDate DATE CHECK (LENGTH(BirthDate) = 10),
     PhoneNumber TEXT UNIQUE,
-    Country INTEGER REFERENCES Country(CountryID) ON DELETE SET NULL
+    Country INTEGER REFERENCES Country(CountryID)
 );
 
 create table Employee (
@@ -109,7 +109,7 @@ create table Class (
 );
 
 create table Ticket (
-    PassengerID INTEGER NOT NULL REFERENCES Passenger(PersonID) ON DELETE CASCADE ON UPDATE CASCADE,
+    PassengerID INTEGER NOT NULL REFERENCES Passenger(PersonID),
     TripID INTEGER REFERENCES Trip(TripID),
     SeatRow INTEGER CHECK (SeatRow > 0),
     SeatLetter TEXT CHECK (LENGTH(SeatLetter) = 1),
