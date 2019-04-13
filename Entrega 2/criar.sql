@@ -119,15 +119,6 @@ create table Ticket (
     ClassID INTEGER NOT NULL REFERENCES Class(ClassID),
 
     PRIMARY KEY (SeatRow, SeatLetter, TripID)
-
-    /*-- Booleans only have value on Departures --
-    
-    ******** Eu pus "ArrivalID" e "DepartureID" tudo em "TripID", se houver razao para diferenciar apita ******
-
-    CONSTRAINT DepartureNulls CHECK (DepartureID IS NULL = (HasBoarded IS NULL AND HasEnteredBoardingZone IS NULL AND HasBoarded IS NULL)),
-    CONSTRAINT ArrivalXorDeparture CHECK ((ArrivalID IS NULL) <> (DepartureID IS NULL)),*/
-
-    -- PRIMARY KEY (PassengerID, TripID)
 );
 
 create table Luggage (
