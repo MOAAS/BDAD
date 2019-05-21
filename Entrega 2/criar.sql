@@ -30,7 +30,7 @@ create table Person (
     PersonID INTEGER PRIMARY KEY,
     SSN TEXT UNIQUE,
     PersonName TEXT NOT NULL,
-    BirthDate DATE CHECK (LENGTH(BirthDate) = 10),
+    BirthDate TEXT CHECK (LENGTH(BirthDate) = 10),
     PhoneNumber TEXT UNIQUE,
     Country INTEGER REFERENCES Country(CountryID)
 );
@@ -77,10 +77,10 @@ create table Airport (
 create table Trip (
     TripID INTEGER PRIMARY KEY,
     AirportCode TEXT NOT NULL REFERENCES Airport(AirportCode),
-    DepartureDate DATE NOT NULL CHECK (LENGTH(DepartureDate) = 10),
-    DepartureTime TIME NOT NULL CHECK (LENGTH(DepartureTime) = 5),
-    ArrivalDate DATE NOT NULL CHECK (LENGTH(ArrivalDate) = 10),
-    ArrivalTime TIME NOT NULL CHECK (LENGTH(ArrivalTime) = 5),
+    DepartureDate TEXT NOT NULL CHECK (LENGTH(DepartureDate) = 10),
+    DepartureTime TEXT NOT NULL CHECK (LENGTH(DepartureTime) = 5),
+    ArrivalDate TEXT NOT NULL CHECK (LENGTH(ArrivalDate) = 10),
+    ArrivalTime TEXT NOT NULL CHECK (LENGTH(ArrivalTime) = 5),
     DurationHours INTEGER NOT NULL CHECK (DurationHours >= 0),
     DurationMinutes INTEGER NOT NULL CHECK (DurationMinutes >= 0 AND DurationMinutes < 60),
     GateID INTEGER NOT NULL REFERENCES Gate(WorkplaceID),
@@ -97,8 +97,8 @@ create table Departure (
 create table Arrival (
     TripID INTEGER PRIMARY KEY REFERENCES Trip(TripID) ON DELETE CASCADE ON UPDATE CASCADE,
     BeltID INTEGER NOT NULL REFERENCES LuggageBelt(WorkplaceID),
-    DropoffDate DATE NOT NULL,
-    DropoffTime TIME NOT NULL,
+    DropoffDate TEXT NOT NULL,
+    DropoffTime TEXT NOT NULL,
 
     CONSTRAINT AvailableLuggageBelt UNIQUE (DropoffDate, DropoffTime, BeltID)
 );
@@ -176,8 +176,8 @@ create table CheckInDesk (
 
 create table HelpDesk (
     WorkplaceID INTEGER PRIMARY KEY REFERENCES Workplace(WorkplaceID) ON DELETE CASCADE ON UPDATE CASCADE,
-    OpenTime TIME NOT NULL CHECK (LENGTH(OpenTime) = 5),
-    CloseTime TIME NOT NULL CHECK (LENGTH(CloseTime) = 5),
+    OpenTime TEXT NOT NULL CHECK (LENGTH(OpenTime) = 5),
+    CloseTime TEXT NOT NULL CHECK (LENGTH(CloseTime) = 5),
     CONSTRAINT CloseTimeAfter CHECK (OpenTime < CloseTime)
 );
 
