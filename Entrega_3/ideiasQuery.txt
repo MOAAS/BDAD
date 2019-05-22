@@ -1,22 +1,36 @@
--Viagens com lotacao esgotada (9)
--Pessoa  id e pais com mala com mais de 1,1kg que vao para new york (1)
--Numero de  Balcoes de apoio abertos em cada viagem (8)
--tabela de avioes com o peso total de malas (5)
--Locais de trabalho  / viagens -> que teem pessoas com mais de 70 anos (3)
--Pessoas com malas no top5 de malas com maior peso numa certa viagem (0)
--Pessoas que viagem VIP numa viagem (7)
--viagens marcadas para junho 2020 (8)
--numero da pista -> id da viagem e data de chegada (??)
--pessoas que trabalham na pista -> numero da pista -> viagens que saem ou chegam numa certa hora as 20:00-21:00 (8)
--a media de (10)
--top 5 de destinos que saem do aeroporto que saem mais (10)
--top 10 funcionarios de balcao com menor salario (6)
--companhias aereas com mais de 50 pessoas a trabalhar nos balcoes
--Listagem ordenada de funcionarios com menos de 30 anos
--Tempo medio de viagens de viagens de vinda
--Top 5 de avioes-> Duracao total de viagens durante o mes de maio de 2019
--Pessoas que estao numa viagem de vinda e de ida , hoje
--frequencia de destinos de um certo aviao 
+Hot Trash:
+-Viagens com lotacao esgotada 		(9)
+-Numero de  Balcoes de check-in abertos em cada viagem 		(8)
+-tabela de avioes com o peso total de malas		 (5)  ->feito<-
+-Pessoas que viajam na 1a classe numa viagem		 (7)
+-viagens marcadas para junho 2020 		(8)
+-pessoas que trabalham na pista -> numero da pista -> viagens que saem ou chegam numa certa hora as 20:00-21:00 		(8)
+-top 5 de destinos de ida do aeroporto mais frequentes 		(10)  ->feito<-
+-top 10 funcionarios de balcao com menor salario		 (6)
+-companhias aereas ordenadas por numero de pessoas a trabalhar em balcoes 		(10)
+-Listagem ordenada por idade de funcionarios com menos de 30 anos	 (6)
+-Tempo medio de viagens de saida	 (10)
+-Avioes ordenados por duracao total de viagens durante o mes de maio de 2019	 (10) ->feito-<
+-Pessoas que estao numa viagem de vinda e de ida no mesmo dia	(10)
+-frequencia de destinos de um certo aviao 	(10)
+-todas as companhias aereas que vao para paris hoje 	(9)
+
+Boas (aprovadas agressivamente pela professora):
+-Pessoas que estao numa viagem de vinda e de ida no mesmo dia
+-Numero de  Balcoes de check-in abertos em cada viagem 	
+
+Novas da professora:
+-Pessoas que sempre viajaram em 1a classe
+-Por cada hora do dia -> avioes que partem e chegam (numero)
+-frequencia de destinos de uma companhia
+
+Novas nao da professora (nao aprovadas por ninguem :( mas ate parecem boas) :
+-Listagem de chefes com o numero de funcionarios
+-Numero de bagagens por cada terminal de bagagens
+-Listagem ordenada de paises com maior numero de passageiros com menos de 18 anos
+
+
+
 
 
 
