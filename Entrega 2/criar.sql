@@ -43,7 +43,7 @@ create table Employee (
 );
 
 create table Passenger (
-    PersonID INTEGER PRIMARY KEY REFERENCES Person(PersonID) ON DELETE CASCADE ON UPDATE CASCADE,
+    PassengerID INTEGER PRIMARY KEY REFERENCES Person(PersonID) ON DELETE CASCADE ON UPDATE CASCADE,
     IDnumber TEXT NOT NULL UNIQUE
 );
 
@@ -109,7 +109,7 @@ create table Class (
 );
 
 create table Ticket (
-    PassengerID INTEGER NOT NULL REFERENCES Passenger(PersonID),
+    PassengerID INTEGER NOT NULL REFERENCES Passenger(PassengerID),
     TripID INTEGER REFERENCES Trip(TripID),
     SeatRow INTEGER CHECK (SeatRow > 0),
     SeatLetter TEXT CHECK (LENGTH(SeatLetter) = 1),
@@ -125,7 +125,7 @@ create table Luggage (
     LuggageID INTEGER PRIMARY KEY,
     Weight INTEGER NOT NULL CHECK (Weight > 0),
     TripID INTEGER NOT NULL REFERENCES Trip(TripID),
-    PersonID INTEGER NOT NULL REFERENCES Passenger(PersonID)
+    PassengerID INTEGER NOT NULL REFERENCES Passenger(PassengerID)
 );
 
 create table Airplane (
