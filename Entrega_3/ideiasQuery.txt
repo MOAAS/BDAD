@@ -1,0 +1,22 @@
+-Viagens com lotacao esgotada (9)
+-Pessoa  id e pais com mala com mais de 1,1kg que vao para new york (1)
+-Numero de  Balcoes de apoio abertos em cada viagem (8)
+-tabela de avioes com o peso total de malas (5)
+-Locais de trabalho  / viagens -> que teem pessoas com mais de 70 anos (3)
+-Pessoas com malas no top5 de malas com maior peso numa certa viagem (0)
+-Pessoas que viagem VIP numa viagem (7)
+-viagens marcadas para junho 2020 (8)
+-numero da pista -> id da viagem e data de chegada (??)
+-pessoas que trabalham na pista -> numero da pista -> viagens que saem ou chegam numa certa hora as 20:00-21:00 (8)
+-a media de (10)
+-top 5 de destinos que saem do aeroporto que saem mais (10)
+-top 10 funcionarios de balcao com menor salario (6)
+-companhias aereas com mais de 50 pessoas a trabalhar nos balcoes
+-Listagem ordenada de funcionarios com menos de 30 anos
+-Tempo medio de viagens de viagens de vinda
+-Top 5 de avioes-> Duracao total de viagens durante o mes de maio de 2019
+-Pessoas que estao numa viagem de vinda e de ida , hoje
+-frequencia de destinos de um certo aviao 
+
+
+
