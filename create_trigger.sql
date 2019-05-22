@@ -20,3 +20,5 @@ OR exists (
 Begin
     Select raise(ignore);
 End
+
+Insert into Arrival values(900, "MAD", "2019-06-06", "15:25", "2019-06-06", "16:45", 2, 20, 34, 24, 2);
