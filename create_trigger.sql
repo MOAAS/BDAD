@@ -22,3 +22,5 @@ Begin
 End
 
 Insert into Arrival values(900, "MAD", "2019-06-06", "15:25", "2019-06-06", "16:45", 2, 20, 34, 24, 2);
+Insert into Trip values(900, 'MAD', '2019-06-06', '15:25', '2019-06-06', '16:45', 2, 20, 34, 24, 2);
+Insert into Arrival values(901, 29,  '2019-04-10', '20:30');
