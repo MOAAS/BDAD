@@ -20,7 +20,7 @@ Boas (aprovadas agressivamente pela professora):
 -Numero de  Balcoes de check-in abertos em cada viagem 	
 
 Novas da professora:
--Pessoas que sempre viajaram em 1a classe
+-Pessoas que sempre viajaram em 1a classe -naoconsigofazersinalmaior FEITO naoconsigofazersinalmenor-
 -Por cada hora do dia -> avioes que partem e chegam (numero)
 -frequencia de destinos de uma companhia
 
