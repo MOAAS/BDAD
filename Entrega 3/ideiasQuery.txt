@@ -16,7 +16,7 @@ Hot Trash:
 -todas as companhias aereas que vao para paris hoje 	(9)
 
 Boas (aprovadas agressivamente pela professora):
--Pessoas que estao numa viagem de vinda e de ida no mesmo dia
+-Pessoas que estao numa viagem de vinda e de ida no mesmo dia  ->FEITO<-
 -Numero de  Balcoes de check-in abertos em cada viagem 	
 
 Novas da professora:

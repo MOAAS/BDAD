@@ -127,7 +127,7 @@ create table Luggage (
     TripID INTEGER NOT NULL REFERENCES Trip(TripID),
     PassengerID INTEGER NOT NULL REFERENCES Passenger(PassengerID)
 );
-
+    
 create table Airplane (
     AirplaneID INTEGER PRIMARY KEY,
     AirlineID INTEGER NOT NULL REFERENCES Airline(AirlineID),
