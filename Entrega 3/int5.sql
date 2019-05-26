@@ -1,9 +1,14 @@
---Devolve as companhias aéreas e a frequência de passagem pelos aeroportos
+-- Lista de companhias aéreas ordenadas decrescentemente por numero de ligacoes, depois ordenadas por nome de companhia e depois por nome de destino --
 
 .mode columns
 .headers on
 .nullvalue NULL
 
-SELECT AirlineName, AirportName, count(*) AS NumVisits FROM (
-    Trip NATURAL JOIN Airline NATURAL JOIN Airplane NATURAL JOIN Airport
-) GROUP BY AirlineName, AirportName;
+SELECT DISTINCT AirlineName, CountryName, NumConnections FROM (
+    SELECT AirlineName, Count(Distinct CountryName) AS NumConnections FROM (
+        Trip NATURAL JOIN Airplane NATURAL JOIN Airline NATURAL JOIN Airport NATURAL JOIN City NATURAL JOIN Country
+    )
+    Group By AirlineName
+) 
+NATURAL JOIN Trip NATURAL JOIN Airplane NATURAL JOIN Airline NATURAL JOIN Airport NATURAL JOIN City NATURAL JOIN Country 
+ORDER BY NUMCONNECTIONS DESC, AirlineName ASC, CountryName ASC;
