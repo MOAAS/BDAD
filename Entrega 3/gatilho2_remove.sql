@@ -1,3 +1,3 @@
 PRAGMA foreign_keys = ON;
 
-Drop Trigger IF EXISTS CapacityTrigger;
+Drop Trigger if exists EmployeeTrigger;

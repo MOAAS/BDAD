@@ -4,7 +4,7 @@
 .headers on
 .nullvalue NULL
 
-SELECT DISTINCT Person.SSN, Person.PersonName, arrivals.ArrivalDate, arrivals.ArrivalTime, departures.DepartureTime FROM (
+SELECT DISTINCT Person.SSN, Person.PersonName, arrivals.ArrivalDate, arrivals.ArrivalTime, departures.DepartureDate, departures.DepartureTime FROM (
     (Ticket NATURAL JOIN Trip NATURAL JOIN Departure) AS departures
         JOIN (Ticket NATURAL JOIN Trip NATURAL JOIN Arrival) AS arrivals 
         ON (departures.PassengerID = arrivals.PassengerID AND departures.DepartureDate LIKE arrivals.ArrivalDate)

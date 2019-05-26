@@ -4,7 +4,7 @@
 .headers on
 .nullvalue NULL
 
-SELECT substr(Times, 0, 3) AS Time, sum(Count) AS NumFlights FROM (
+SELECT substr(Times, 0, 3) || "h" AS Time, sum(Count) AS NumFlights FROM (
     SELECT DepartureTime AS Times, count(*) AS Count FROM (
         Departure NATURAL JOIN Trip
     ) GROUP BY DepartureTime
