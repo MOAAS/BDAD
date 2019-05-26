@@ -740,17 +740,17 @@ insert into Ticket values(10, 6, 18, "C", 0, 0, 0, 3);
 insert into Ticket values(11, 6, 05, "E", 0, 0, 0, 0);
 insert into Ticket values(12, 6, 08, "A", 0, 0, 0, 1);
 insert into Ticket values(13, 6, 08, "B", 0, 0, 0, 3);
-insert into Ticket values(14, 6, 11, "D", 0, 0, 0, 1);
-insert into Ticket values(15, 6, 11, "C", 0, 0, 0, 3);
+insert into Ticket values(14, 6, 11, "D", 1, 0, 0, 1);
+insert into Ticket values(15, 6, 11, "C", 1, 1, 0, 3);
 
 insert into Ticket values(16, 11, 12, "B", 0, 0, 0, 1);
 insert into Ticket values(17, 11, 16, "E", 0, 0, 0, 1);
 insert into Ticket values(18, 11, 18, "C", 0, 0, 0, 0);
 insert into Ticket values(19, 11, 05, "E", 0, 0, 0, 3);
 insert into Ticket values(20, 11, 08, "A", 0, 0, 0, 3);
-insert into Ticket values(21, 11, 08, "B", 0, 0, 0, 0);
-insert into Ticket values(22, 11, 11, "D", 0, 0, 0, 2);
-insert into Ticket values(23, 11, 11, "C", 0, 0, 0, 2);
+insert into Ticket values(21, 11, 08, "B", 1, 0, 0, 0);
+insert into Ticket values(22, 11, 11, "D", 1, 0, 0, 2);
+insert into Ticket values(23, 11, 11, "C", 1, 0, 0, 2);
 
 insert into Ticket values(22, 17, 12, "B", 0, 0, 0, 1);
 insert into Ticket values(23, 17, 16, "E", 0, 0, 0, 0);
