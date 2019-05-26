@@ -1,9 +1,7 @@
--- Devolve o nome das 5 cidades mais visitadas a partir do aeroporto
+-- Lista de passageiros que sempre viajaram 1ª classe
 
 .mode columns
 .headers on
 .nullvalue NULL
 
-SELECT CityName, count(*) AS Count FROM (
-    Departure NATURAL JOIN Trip NATURAL JOIN Airport NATURAL JOIN City
-) GROUP BY CityID ORDER BY Count DESC LIMIT 5;
+SELECT Passenger.PassengerID, IDnumber FROM Passenger WHERE NOT EXISTS (Select PassengerID FROM Ticket WHERE PassengerID = Passenger.PassengerID AND ClassID != 2);
