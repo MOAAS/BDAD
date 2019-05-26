@@ -9,4 +9,4 @@ SELECT Workplace.WorkplaceName,
         avg((strftime('%Y', 'now') - strftime('%Y', Person.BirthDate)) - (strftime('%m-%d', 'now') < strftime('%m-%d', Person.BirthDate))) AS AverageAge
 FROM Workplace LEFT OUTER JOIN (Employee NATURAL JOIN Person) Using(WorkplaceID) 
 GROUP BY Workplace.WorkplaceID
-ORDER BY AverageSalary ASC, AverageAge, DESC;
+ORDER BY AverageSalary ASC, AverageAge ASC;

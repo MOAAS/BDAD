@@ -6,4 +6,4 @@
 
 SELECT Person.PersonName, Passenger.IDnumber, Trip.DepartureDate, Trip.DepartureTime 
 FROM Person JOIN Passenger ON Person.PersonID = Passenger.PassengerID NATURAL JOIN Ticket NATURAL JOIN Trip
-WHERE Ticket.HasCheckedIn = True AND Ticket.HasBoarded = False AND Trip.DepartureDate LIKE (SELECT strftime('%Y-%m', 'now') || "-%");
+WHERE Ticket.HasCheckedIn = 1 AND Ticket.HasBoarded = 0 AND Trip.DepartureDate LIKE (SELECT strftime('%Y-%m', 'now') || "-%");

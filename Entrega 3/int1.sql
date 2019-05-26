@@ -4,7 +4,7 @@
 .headers on
 .nullvalue NULL
 
-SELECT TripID, Trip.AirportCode, Trip.DurationHours + Trip.DurationMinutes / 60.0 AS Duration, sum(Weight) AS LuggageWeight 
+SELECT TripID, Trip.AirportCode, round(Trip.DurationHours + Trip.DurationMinutes / 60.0, 2) AS "Duration (Hours)", sum(Weight) AS LuggageWeight 
 FROM Trip NATURAL JOIN Luggage 
-GROUP BY TripID;    
-ORDER BY Duration;
+GROUP BY TripID
+ORDER BY LuggageWeight;
