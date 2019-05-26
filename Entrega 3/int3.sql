@@ -1,7 +1,9 @@
--- Devolve o número de vezes que as pistas foram usadas no mês de maio de 2019
+-- Devolve Data, Hora, Nomes e IDs de pessoas que em viagens este mes, fizeram check-in mas nao embarcaram --
 
 .mode columns
 .headers on
 .nullvalue NULL
 
-SELECT RunwayID, count(*) AS TimesUsed FROM Trip GROUP BY RunwayID;
+SELECT Person.PersonName, Passenger.IDnumber, Trip.DepartureDate, Trip.DepartureTime 
+FROM Person JOIN Passenger ON Person.PersonID = Passenger.PassengerID NATURAL JOIN Ticket NATURAL JOIN Trip
+WHERE Ticket.HasCheckedIn = True AND Ticket.HasBoarded = False AND Trip.DepartureDate LIKE (SELECT strftime('%Y-%m', 'now') || "-%");
